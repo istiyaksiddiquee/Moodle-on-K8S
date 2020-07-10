@@ -6,7 +6,7 @@ node {
     stage('Shared') {
         echo 'Shared stage'
 
-        // checkout scm
+        checkout scm
     }
 
     load 'Project1/Jenkinsfile'
