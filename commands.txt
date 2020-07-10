@@ -1,0 +1,4 @@
+docker image build -f PrepareJenkinsWithDocker -t jenkins-docker .
+docker run -d -p 8080:8080 -p 50000:50000 -v /var/run/docker.sock:/var/run/docker.sock -v "E:\\Codes\\Magnum Opus":/home/project --name jenkins_local jenkins-docker
+docker exec -it jenkins_local /bin/bash
+cat /var/jenkins_home/secrets/initialAdminPassword
