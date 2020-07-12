@@ -1,17 +1,24 @@
-stage('SpringREST - Compile') {
-    echo 'Compiling Spring REST'
-    sh 'mvn clean compile package'
+tools { 
+    maven 'Maven 3.3.9' 
+    jdk 'jdk8' 
 }
-stage('SpringREST - Test') {
-    echo 'Testing REST'
-}
-stage('SpringREST - Dockerize') {
-    echo 'Building Docker Image'
-    sh 'docker build -t springio/gs-spring-boot-docker .'
-}
-stage('SpringREST - Helm') {
-    echo 'Packaging in Helm'
-}
-stage('SpringREST - K8S Deploy') {
-    echo 'Deploying in K8S'
+
+stages {
+    stage('SpringREST - Compile') {
+        echo 'Compiling Spring REST'
+        sh 'mvn clean compile package'
+    }
+    stage('SpringREST - Test') {
+        echo 'Testing REST'
+    }
+    stage('SpringREST - Dockerize') {
+        echo 'Building Docker Image'
+        sh 'docker build -t springio/gs-spring-boot-docker .'
+    }
+    stage('SpringREST - Helm') {
+        echo 'Packaging in Helm'
+    }
+    stage('SpringREST - K8S Deploy') {
+        echo 'Deploying in K8S'
+    }
 }
