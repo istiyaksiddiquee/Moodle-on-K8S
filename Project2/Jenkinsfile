@@ -1,3 +1,15 @@
-stage('Project 2 Stage') {
-    echo 'Project 2 Stage'
+stage('Node - Compile') {
+    echo 'Compiling Node REST'
+}
+stage('Node - Test') {
+    echo 'Testing Node REST'
+}
+stage('Node - Dockerize') {
+    echo 'Building Docker Image'
+}
+stage('Node - Helm') {
+    echo 'Packaging in Helm'
+}
+stage('Node - K8S Deploy') {
+    echo 'Deploying in K8S'
 }

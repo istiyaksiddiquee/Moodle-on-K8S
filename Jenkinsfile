@@ -10,10 +10,6 @@ node {
     }
 
     load 'Project1/Jenkinsfile'
-    // if (status == 'Project 1') {
-        
-    // } else if (status == 'Project 2') {
-    //     load 'Project2/Jenkinsfile'
-    // }
+    load 'Project2/Jenkinsfile'
 }
 
