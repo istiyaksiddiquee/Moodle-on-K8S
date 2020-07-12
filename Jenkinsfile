@@ -10,11 +10,7 @@ node {
     }
 
     load 'Project1/Jenkinsfile'
-    load 'Project2/Jenkinsfile'
-    load 'Project1/Jenkinsfile'
-    load 'Project2/Jenkinsfile'
-    load 'Project1/Jenkinsfile'
-    load 'Project2/Jenkinsfile'
+    // load 'Project2/Jenkinsfile'
     
 }
 
