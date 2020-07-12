@@ -1,3 +1,15 @@
-stage('Project 1 Stage') {
-    echo 'important change'
+stage('SpringREST - Compile') {
+    echo 'Compiling Spring REST'
+}
+stage('SpringREST - Test') {
+    echo 'Testing REST'
+}
+stage('SpringREST - Dockerize') {
+    echo 'Building Docker Image'
+}
+stage('SpringREST - Helm') {
+    echo 'Packaging in Helm'
+}
+stage('SpringREST - K8S Deploy') {
+    echo 'Deploying in K8S'
 }
