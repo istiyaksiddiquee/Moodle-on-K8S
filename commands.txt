@@ -4,3 +4,7 @@ docker exec -it jenkins_local /bin/bash
 cat /var/jenkins_home/secrets/initialAdminPassword
 
 git add . && git commit -m "checker 2"
+
+
+
+docker container run -it -v /var/run/docker.sock:/var/run/docker.sock -v "C:\\Users\\Istiyak\\.kube":/root/.kube helmkube:1.0.0 /bin/bash
