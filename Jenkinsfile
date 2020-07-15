@@ -7,7 +7,7 @@ node {
         echo 'Shared stage'
     }
     
-    load 'Project/Project1/Jenkinsfile'
+    // load 'Project/Project1/Jenkinsfile'
     // load 'Project/Project2/Jenkinsfile'
     
 }
