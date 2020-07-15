@@ -6,6 +6,9 @@ pipeline{
     agent any
     
     stages{
-        load 'Project/Project1/Jenkinsfile'
+        stage("Project 1"){
+            load 'Project/Project1/Jenkinsfile'
+            
+        }
     }
 }
