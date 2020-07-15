@@ -14,9 +14,10 @@ services:
       - ./JenkinsBuilder/config:/var/jenkins_conf
       - /var/run/docker.sock:/var/run/docker.sock
       - C:\Users\Istiyak\.kube:/root/.kube
-      - E:\Codes\Magnum Opus:/home/project    
+      - E:\Codes\Magnum Opus:/home/project
     environment:
       - CASC_JENKINS_CONFIG=/var/jenkins_conf    
+      - PROJECT_HOME=/home/project
     # depends_on:
     #   - "sonarqube"
     # networks:

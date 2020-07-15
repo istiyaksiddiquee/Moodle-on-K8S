@@ -6,12 +6,14 @@ jobs:
               cpsScm {
                   scm {
                     git {
-                        remote { url 'https://github.com/tsundberg/maven-build-with-jenkins-pipeline.git' }
+                        remote { 
+                            url("file://${PROJECT_HOME}")
+                        }
                         branch '*/master'
                         extensions {}
                     }
                   }
-                  scriptPath 'src/ci/Jenkinsfile'
+                  scriptPath 'Jenkinsfile'
               }
           }
       }
