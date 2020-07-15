@@ -2,13 +2,16 @@
 
 // status = 'Project 1'
 
-node {
-    stage('Shared') {
-        echo 'Shared stage'
+pipeline{
+    agent{
+        label "node"
     }
-    
-    load 'Project/Project1/Jenkinsfile'
-    // load 'Project/Project2/Jenkinsfile'
-    
+    stages{
+        stage("Project 1"){
+            steps{
+                echo "========executing script from project 1========"
+                load 'Project/Project1/Jenkinsfile'
+            }            
+        }
+    }    
 }
-
