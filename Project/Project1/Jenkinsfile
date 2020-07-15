@@ -1,1 +1,3 @@
-echo 'Compiling Spring REST'    
+stage('Project 1') {
+    echo 'Compiling Spring REST'
+}
