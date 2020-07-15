@@ -3,9 +3,8 @@
 // status = 'Project 1'
 
 pipeline{
-    agent{
-        any
-    }
+    agent any
+    
     stages{
         stage("Project 1"){
             steps{
