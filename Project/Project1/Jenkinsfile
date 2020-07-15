@@ -1,10 +1,7 @@
-pipeline{
-    agent any 
-    stages{
-        stage("Project 1"){
-            steps{
-                echo 'Compiling Spring REST'
-            }
+stages{
+    stage("Project 1"){
+        steps{
+            echo 'Compiling Spring REST'
         }
-    }    
+    }
 }
