@@ -6,14 +6,14 @@
 stages {
     stage('SpringREST - Compile') {
         echo 'Compiling Spring REST'
-        sh 'mvn clean compile package'
+        // sh 'mvn clean compile package'
     }
     stage('SpringREST - Test') {
         echo 'Testing REST'
     }
     stage('SpringREST - Dockerize') {
         echo 'Building Docker Image'
-        sh 'docker build -t springio/gs-spring-boot-docker .'
+        // sh 'docker build -t springio/gs-spring-boot-docker .'
     }
     stage('SpringREST - Helm') {
         echo 'Packaging in Helm'
