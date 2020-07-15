@@ -1,1 +1,3 @@
-echo 'Compiling Spring REST'
+steps{
+    echo 'Compiling Spring REST'
+}
