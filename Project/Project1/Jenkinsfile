@@ -1,19 +1,11 @@
-// tools { 
-//     maven 'Maven 3.3.9' 
-//     jdk 'jdk8' 
-// }
-
-
 stage('SpringREST - Compile') {
-    echo 'Compiling Spring REST'
-    // sh 'mvn clean compile package'
+    echo 'Compiling Spring REST'    
 }
 stage('SpringREST - Test') {
     echo 'Testing REST'
 }
 stage('SpringREST - Dockerize') {
     echo 'Building Docker Image'
-    // sh 'docker build -t springio/gs-spring-boot-docker .'
 }
 stage('SpringREST - Helm') {
     echo 'Packaging in Helm'
