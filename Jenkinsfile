@@ -8,9 +8,9 @@ node {
 
         checkout scm
     }
-
-    // load 'Project1/Jenkinsfile'
-    load 'Project2/Jenkinsfile'
+    
+    load 'Project/Project1/Jenkinsfile'
+    // load 'Project/Project2/Jenkinsfile'
     
 }
 

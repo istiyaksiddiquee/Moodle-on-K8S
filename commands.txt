@@ -8,3 +8,14 @@ git add . && git commit -m "checker 2"
 
 
 docker container run -it -v /var/run/docker.sock:/var/run/docker.sock -v "C:\\Users\\Istiyak\\.kube":/root/.kube helmkube:1.0.0 /bin/bash
+
+
+if you want to add a new plugin to your configuration as code plugin list, check with the following script 
+
+URL: localhost:8080/script 
+
+Jenkins.instance.pluginManager.plugins.each{
+  plugin -> 
+    println ("${plugin.getDisplayName()} (${plugin.getShortName()}): ${plugin.getVersion()}")
+}
+

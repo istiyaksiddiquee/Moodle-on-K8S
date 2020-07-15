@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  jenkins:
+    hostname: jenkins
+    container_name: jenkins_local 
+    build: 
+      context: ./master
+    ports: 
+      - 80:8080
+      - 50000:50000
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - ./config:/var/jenkins_conf
+      - /var/run/docker.sock:/var/run/docker.sock
+      - C:\Users\Istiyak\.kube:/root/.kube
+      - E:\Codes\Magnum Opus:/home/project
+    
+    environment:
+      - CASC_JENKINS_CONFIG=/var/jenkins_conf
+      
+volumes:
+  jenkins_home:
+
+secrets:
+  admin_password:
+    file: "${WORKDIR-.}/secrets/admin_password"
+  sonarqube_token:
+    file: "${WORKDIR-.}/secrets/sonarqube_token"

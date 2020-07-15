@@ -1,0 +1,17 @@
+jobs:
+  - script: >
+      pipelineJob('maven-pipeline-version-controlled') {
+          definition {
+              quietPeriod(120)
+              cpsScm {
+                  scm {
+                    git {
+                        remote { url 'https://github.com/tsundberg/maven-build-with-jenkins-pipeline.git' }
+                        branch '*/master'
+                        extensions {}
+                    }
+                  }
+                  scriptPath 'src/ci/Jenkinsfile'
+              }
+          }
+      }
