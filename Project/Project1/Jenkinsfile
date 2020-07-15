@@ -1,4 +1,4 @@
-agent any
+
     
 stages{
     stage("Project 1"){
