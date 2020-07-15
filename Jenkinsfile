@@ -4,7 +4,7 @@
 
 pipeline{
     agent{
-        label "node"
+        any
     }
     stages{
         stage("Project 1"){
