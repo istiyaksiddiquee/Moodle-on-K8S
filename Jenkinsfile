@@ -1,5 +1,9 @@
 pipeline{
     agent any
+     tools { 
+        maven 'Maven 3.6.3' 
+        jdk 'jdk8' 
+    }
     stages{
         stage("Check SCM") {
             steps {
@@ -11,6 +15,7 @@ pipeline{
                 echo "========executing A========"
                 dir("Project/Project1") {
                     sh 'ls'
+                    sh 'mvn -v'
                 }
             }
         }
