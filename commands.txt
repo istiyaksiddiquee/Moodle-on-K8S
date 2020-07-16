@@ -23,3 +23,7 @@ Jenkins.instance.pluginManager.plugins.each{
 
 
 http://localhost:8080/job/automated_build/build?token=testedToken
+
+
+
+docker run -it -v C:\Users\Istiyak\.kube:/root/.kube -v /var/run/docker.sock:/var/run/docker.sock -v "E:\Codes\Magnum Opus":/home/project helm_kube_mashup /bin/bash
