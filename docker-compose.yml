@@ -15,6 +15,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - C:\Users\Istiyak\.kube:/root/.kube
       - E:\Codes\Magnum Opus:/home/project
+      - E:\Codes\Magnum Opus\maven_repo:/home/mvn_repo
     secrets:
       - source: admin_password
         target: ADMIN_PASSWORD

@@ -1,8 +1,6 @@
 pipeline{
     agent any
-     tools { 
-        maven 'Maven 3' 
-    }
+    
     stages{
         stage("Check SCM") {
             steps {
