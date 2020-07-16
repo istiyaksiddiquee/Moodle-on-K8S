@@ -11,7 +11,7 @@ pipeline{
             steps{
                 echo "========executing A========"
                 dir("Project/Project1") {
-                    sh 'cwd'
+                    sh 'pwd'
                     sh 'mvn clean install'
                 }
             }
