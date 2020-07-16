@@ -15,9 +15,16 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - C:\Users\Istiyak\.kube:/root/.kube
       - E:\Codes\Magnum Opus:/home/project
+    secrets:
+      - source: admin_password
+        target: ADMIN_PASSWORD
+      - source: automated_build_token
+        target: AUTOMATED_BUILD_TOKEN
     environment:
       - CASC_JENKINS_CONFIG=/var/jenkins_conf    
       - PROJECT_HOME=/home/project
+      - PIPELINE_ID=automated_build      
+
     # depends_on:
     #   - "sonarqube"
     # networks:
@@ -71,6 +78,8 @@ secrets:
     file: "${WORKDIR-.}/secrets/admin_password"
   sonarqube_token:
     file: "${WORKDIR-.}/secrets/sonarqube_token"
+  automated_build_token: 
+    file: "${WORKDIR-.}/secrets/automated_build_token"
 
 # networks:
 #   sonarnet:

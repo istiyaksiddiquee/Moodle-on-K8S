@@ -4,6 +4,3 @@ stage("P1"){
         echo 'Compiling Spring REST'
     }            
 }
-
-
-    

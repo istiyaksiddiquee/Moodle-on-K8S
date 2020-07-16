@@ -19,3 +19,7 @@ Jenkins.instance.pluginManager.plugins.each{
     println ("${plugin.getDisplayName()} (${plugin.getShortName()}): ${plugin.getVersion()}")
 }
 
+
+
+
+http://localhost:8080/job/automated_build/build?token=testedToken

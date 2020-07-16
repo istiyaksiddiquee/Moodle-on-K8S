@@ -1,19 +1,21 @@
 jobs:
   - script: >
-      pipelineJob('maven-pipeline-version-controlled') {
-          definition {
-              quietPeriod(120)
-              cpsScm {
-                  scm {
-                    git {
-                        remote { 
-                            url("file://${PROJECT_HOME}")
+        pipelineJob('${PIPELINE_ID}') {
+            configure { project ->
+                (project / 'authToken').setValue('${AUTOMATED_BUILD_TOKEN}')
+            }
+            definition {
+                cpsScm {
+                    scm {
+                        git {
+                            remote { 
+                                url("file://${PROJECT_HOME}")
+                            }
+                            branch '*/master'
+                            extensions {}
                         }
-                        branch '*/master'
-                        extensions {}
                     }
-                  }
-                  scriptPath 'Jenkinsfile'
-              }
-          }
-      }
+                scriptPath 'Jenkinsfile'
+                }
+            }
+        }
