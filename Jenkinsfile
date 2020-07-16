@@ -14,7 +14,7 @@ pipeline{
                 echo "========executing A========"
                 dir("Project/Project1") {
                     sh 'ls'
-                    sh 'mvn -v'
+                    sh 'mvn clean compile package'
                 }
             }
         }
