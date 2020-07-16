@@ -9,6 +9,9 @@ pipeline{
         stage("Project1"){
             steps{
                 echo "========executing A========"
+                dir("Project/Project1") {
+                    sh '$PWD'
+                }
             }
         }
     }    
