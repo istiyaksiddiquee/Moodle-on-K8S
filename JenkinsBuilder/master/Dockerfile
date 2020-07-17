@@ -15,7 +15,7 @@ RUN xargs /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 RUN apt-get update -qq \
     && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common maven nodejs python3
 
-COPY settings.xml ~/.m2
+COPY settings.xml /etc/maven/
 
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 

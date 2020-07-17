@@ -12,8 +12,7 @@ pipeline{
                 echo "========executing A========"
                 dir("Project/Project1") {
                     sh 'pwd'
-                    load 'Jenkinsfile'
-                    // sh 'mvn clean install'
+                    sh 'mvn clean package'
                 }
             }
         }
