@@ -1,6 +1,10 @@
-
-stage("P1"){
-    steps{
-        echo 'Compiling Spring REST'
-    }            
+pipeline{
+    agent any
+    stages {
+        stage("P1"){
+            steps{
+                echo 'Compiling Spring REST'
+            }            
+        }
+    }
 }
