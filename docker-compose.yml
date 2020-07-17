@@ -3,7 +3,7 @@ version: '3.8'
 services:
   jenkins:
     hostname: jenkins
-    container_name: jenkins_compose 
+    container_name: jenkins_local 
     build: 
       context: ./JenkinsBuilder/master/
     ports: 

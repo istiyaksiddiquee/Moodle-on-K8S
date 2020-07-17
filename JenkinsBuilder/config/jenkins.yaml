@@ -49,11 +49,7 @@ tool:
   maven:
     installations:
       - name: "Maven 3"
-        properties:
-          - installSource:
-              installers:
-                - maven:
-                    id: "3.6.3"
+        home: "/usr/share/maven"
   sonarRunnerInstallation:
     installations:
     - name: "sonar-scanner-default"
