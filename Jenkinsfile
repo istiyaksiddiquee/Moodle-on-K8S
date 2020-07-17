@@ -10,11 +10,12 @@ pipeline{
         stage("Project1"){
             steps{
                 echo "========executing A========"
-                dir("Project/Project1") {
-                    sh 'pwd'
-                    sh 'mvn clean install'
-                }
+                // dir("Project/Project1") {
+                //     sh 'pwd'
+                //     sh 'mvn clean install'
+                // }
             }
         }
+        load 'Project/Project1/Jenkinsfile'
     }    
 }
