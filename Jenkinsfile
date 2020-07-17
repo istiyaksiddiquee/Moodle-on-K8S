@@ -8,8 +8,8 @@ pipeline{
             }            
         }
         stage("Project1"){
-            load 'Project/Project1/Jenkinsfile'
             steps{
+                load 'Project/Project1/Jenkinsfile'
                 echo "========executing A========"
                 // dir("Project/Project1") {
                 //     sh 'pwd'
