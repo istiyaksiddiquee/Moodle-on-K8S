@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres_db:
+    hostname: postgres
+    container_name: magnum_pgdb
+    image: postgres:13
+    ports: 
+      - 5432:5432
+    volumes:
+      - pg-datastore:/var/lib/postgresql
+      - ./PostgresDB/init.sql:/docker-entrypoint-initdb.d/init.sql
+    secrets:
+      - source: db_password
+        target: DB_PASSWORD
+    environment: 
+      - POSTGRES_PASSWORD=password
+    networks:
+      - backend
+
+volumes:
+  pg-datastore:
+
+secrets:
+  db_password:
+    file: "./PostgresDB/db_password"  
+
+networks:
+  backend:
+    driver: bridge
