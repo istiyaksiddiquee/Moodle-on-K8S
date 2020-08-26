@@ -1,6 +1,6 @@
-/.idea
-/.settings
-/target
+/.idea/
+/.settings/
+/target/
 .classpath
 .project
 user-management.iml
