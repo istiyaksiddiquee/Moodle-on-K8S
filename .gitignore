@@ -1,2 +1,8 @@
-Project\Project1\.idea
+
 maven_repo
+Project/Project1/.idea
+Project/Project1/.settings
+Project/Project1/target
+Project/Project1/.classpath
+Project/Project1/.project
+Project/Project1/user-management.iml
