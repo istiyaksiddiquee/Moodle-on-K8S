@@ -4,20 +4,21 @@ GRANT ALL PRIVILEGES ON DATABASE magnum_rdbms TO magnumopus;
 
 \c magnum_rdbms;
 
-CREATE TYPE action_type AS ENUM ('CREATE','UPDATE', 'DELETE');
+CREATE SEQUENCE serial START 1;
+ALTER TABLE serial OWNER TO magnumopus;
 
 CREATE TABLE IF NOT EXISTS t_audit (
-	audit_id SERIAL PRIMARY KEY, 	
+	audit_id INT NOT NULL PRIMARY KEY DEFAULT nextval('serial'), 	
 	created_on TIMESTAMP DEFAULT NOW(), 
 	user_id INT NOT NULL, 
 	affected_table VARCHAR,
-	performed_operation action_type,
+	performed_operation VARCHAR,
 	audit_msg VARCHAR
 );
 ALTER TABLE t_audit OWNER TO magnumopus;
 
 CREATE TABLE IF NOT EXISTS t_faculty (
-	faculty_id SERIAL PRIMARY KEY, 
+	faculty_id INT NOT NULL PRIMARY KEY DEFAULT nextval('serial'),
 	audit_id INT, 
 	name VARCHAR, 
 	address VARCHAR,
@@ -26,7 +27,7 @@ CREATE TABLE IF NOT EXISTS t_faculty (
 ALTER TABLE t_faculty OWNER TO magnumopus;
 
 CREATE TABLE IF NOT EXISTS t_department (
-	department_id SERIAL PRIMARY KEY, 
+	department_id INT NOT NULL PRIMARY KEY DEFAULT nextval('serial'),
 	audit_id INT, 
 	name VARCHAR, 
 	address VARCHAR, 
@@ -38,7 +39,7 @@ CREATE TABLE IF NOT EXISTS t_department (
 ALTER TABLE t_department OWNER TO magnumopus;
 
 CREATE TABLE IF NOT EXISTS t_course (
-	course_id SERIAL PRIMARY KEY, 
+	course_id INT NOT NULL PRIMARY KEY DEFAULT nextval('serial'),
 	audit_id INT, 
 	title VARCHAR, 
 	credit_points FLOAT(8),
@@ -51,29 +52,29 @@ CREATE TABLE IF NOT EXISTS t_course (
 ALTER TABLE t_course OWNER TO magnumopus;
 
 CREATE TABLE IF NOT EXISTS t_user (
-	user_id SERIAL PRIMARY KEY, 
+	user_id INT NOT NULL PRIMARY KEY DEFAULT nextval('serial'),
 	audit_id INT, 
 	first_name VARCHAR, 
 	last_name VARCHAR, 
 	user_name VARCHAR NOT NULL UNIQUE, 
 	email_id VARCHAR NOT NULL UNIQUE,
-	password VARCHAR NOT NULL UNIQUE,
+	password VARCHAR NOT NULL,
 	address VARCHAR,
 	CONSTRAINT fk_user_audit FOREIGN KEY(audit_id) REFERENCES t_audit(audit_id) 	
 );
 ALTER TABLE t_user OWNER TO magnumopus;
 
-CREATE TABLE IF NOT EXISTS t_role_permissions (
-	role_permission_id SERIAL PRIMARY KEY, 
+CREATE TABLE IF NOT EXISTS t_role_permission (
+	role_permission_id INT NOT NULL PRIMARY KEY DEFAULT nextval('serial'),
 	audit_id INT, 
 	role_name VARCHAR NOT NULL, 
 	privilege json NOT NULL,
 	CONSTRAINT fk_role_audit FOREIGN KEY(audit_id) REFERENCES t_audit(audit_id)
 );
-ALTER TABLE t_role_permissions OWNER TO magnumopus;
+ALTER TABLE t_role_permission OWNER TO magnumopus;
 
-CREATE TABLE IF NOT EXISTS t_acl_rules (
-	acl_rule_id SERIAL PRIMARY KEY, 
+CREATE TABLE IF NOT EXISTS t_acl_rule (
+	acl_rule_id INT NOT NULL PRIMARY KEY DEFAULT nextval('serial'),
 	audit_id INT, 
 	user_id INT NOT NULL,
 	role_permission_id INT NOT NULL, 
@@ -82,14 +83,14 @@ CREATE TABLE IF NOT EXISTS t_acl_rules (
 	
 	CONSTRAINT fk_acl_user FOREIGN KEY(user_id) REFERENCES t_user(user_id)
 	ON UPDATE CASCADE ON DELETE CASCADE,	
-	CONSTRAINT fk_acl_role FOREIGN KEY(role_permission_id) REFERENCES t_role_permissions(role_permission_id)
+	CONSTRAINT fk_acl_role FOREIGN KEY(role_permission_id) REFERENCES t_role_permission(role_permission_id)
 	ON UPDATE CASCADE ON DELETE CASCADE,
 	CONSTRAINT fk_acl_audit FOREIGN KEY(audit_id) REFERENCES t_audit(audit_id) 	
 );
-ALTER TABLE t_acl_rules OWNER TO magnumopus;
+ALTER TABLE t_acl_rule OWNER TO magnumopus;
 
 CREATE TABLE IF NOT EXISTS t_group (
-	group_id SERIAL PRIMARY KEY, 
+	group_id INT NOT NULL PRIMARY KEY DEFAULT nextval('serial'),
 	audit_id INT, 
 	group_name VARCHAR,		
 	CONSTRAINT fk_group_audit FOREIGN KEY(audit_id) REFERENCES t_audit(audit_id)
@@ -97,7 +98,7 @@ CREATE TABLE IF NOT EXISTS t_group (
 ALTER TABLE t_group OWNER TO magnumopus;
 
 CREATE TABLE IF NOT EXISTS t_group_user_mapping (
-	group_user_mapping_id SERIAL PRIMARY KEY, 
+	group_user_mapping_id INT NOT NULL PRIMARY KEY DEFAULT nextval('serial'),
 	audit_id INT, 
 	user_id INT NOT NULL, 
 	group_id INT NOT NULL, 

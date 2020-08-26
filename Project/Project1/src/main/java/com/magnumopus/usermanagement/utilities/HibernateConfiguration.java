@@ -1,4 +1,4 @@
-package com.magnumopus.usermanagement.config;
+package com.magnumopus.usermanagement.utilities;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -12,35 +12,35 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "t_faculty")
-public class Faculty {
+@Table(name = "t_role_permission")
+public class RolePermission {
 
     // ============================ VARIABLES ===================================
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "serial")
     @SequenceGenerator(name = "serial", sequenceName = "serial", allocationSize = 1)
-    @Column(name = "faculty_id")
-    private int facultyId;
+    @Column(name = "role_permission_id")
+    private int rolePermissionsId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="audit_id", referencedColumnName = "audit_id")
+    @JoinColumn(name = "audit_id", referencedColumnName = "audit_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JsonIgnore
     private Audit audit;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "role_name")
+    private String roleName;
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "privilege")
+    private String privilege;
 
     // ============================ CONSTRUCTORS ===================================
 
-    public Faculty(Audit audit, String name, String address) {
+    public RolePermission(Audit audit, String roleName, String privilege) {
 
         this.audit = audit;
-        this.name = name;
-        this.address = address;
+        this.roleName = roleName;
+        this.privilege = privilege;
     }
 }

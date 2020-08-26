@@ -1,30 +1,14 @@
 package com.magnumopus.usermanagement.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-
+import javax.persistence.*;
 
 @Entity
-@XmlRootElement
-//@NamedNativeQuery(name = "Human.findByNameNamedNative",
-//        query = "SELECT * FROM t_human h WHERE " +
-//                "LOWER(h.last_name) LIKE LOWER(CONCAT('%',:name, '%'))" +
-//                "ORDER BY h.first_name ASC",
-//        resultClass = User.class
-//)
-//@NamedQuery(name = "Human.findByNameNamed",
-//        query = "SELECT h FROM User h WHERE " +
-//                "LOWER(h.lastName) LIKE LOWER(CONCAT('%', :name, '%')) " +
-//                "ORDER BY h.firstName ASC"
-//)
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,15 +16,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User {
 
     // ============================ VARIABLES ===================================
+
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "serial")
+    @SequenceGenerator(name = "serial", sequenceName = "serial", allocationSize = 1)
     @Column(name = "user_id")
-    private int id;
+    private int userId;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "audit_id", referencedColumnName = "audit_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnore
+    private Audit audit;
 
     @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "user_name")
+    private String userName;
 
     @Column(name = "email_id")
     private String emailId;

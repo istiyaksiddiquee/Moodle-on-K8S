@@ -1,7 +1,11 @@
 package com.magnumopus.usermanagement.services;
 
+import com.magnumopus.usermanagement.models.Audit;
 import com.magnumopus.usermanagement.models.User;
+import com.magnumopus.usermanagement.repositories.AuditRepository;
 import com.magnumopus.usermanagement.repositories.UserRepository;
+import com.magnumopus.usermanagement.utilities.ActionType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,11 +18,16 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserRepository userRepository;
 
+    @Autowired
+    private AuditRepository auditRepository;
+
     /***
-     * @see com.magnumopus.usermanagement.services.UserService#persistUser(User)
+     * @see com.magnumopus.usermanagement.services.UserService#createUser(User)
      * */
     @Override
-    public User persistUser(User user) {
+    public User createUser(User user) {
+        Audit audit = auditRepository.save(new Audit(1, "t_user", ActionType.CREATE.toString(), "New User created"));
+        user.setAudit(audit);
         userRepository.save(user);
         return user;
     }

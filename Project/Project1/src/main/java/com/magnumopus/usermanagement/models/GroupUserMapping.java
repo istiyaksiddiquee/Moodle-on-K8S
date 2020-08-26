@@ -12,35 +12,39 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "t_faculty")
-public class Faculty {
+@Table(name = "t_group_user_mapping")
+public class GroupUserMapping {
 
     // ============================ VARIABLES ===================================
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "serial")
     @SequenceGenerator(name = "serial", sequenceName = "serial", allocationSize = 1)
-    @Column(name = "faculty_id")
-    private int facultyId;
+    @Column(name = "group_user_mapping_id")
+    private int groupUserMappingId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="audit_id", referencedColumnName = "audit_id")
+    @JoinColumn(name = "audit_id", referencedColumnName = "audit_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JsonIgnore
     private Audit audit;
 
-    @Column(name = "name")
-    private String name;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private User user;
 
-    @Column(name = "address")
-    private String address;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Group group;
 
     // ============================ CONSTRUCTORS ===================================
 
-    public Faculty(Audit audit, String name, String address) {
+    public GroupUserMapping(Audit audit, User user, Group group) {
 
         this.audit = audit;
-        this.name = name;
-        this.address = address;
+        this.group = group;
+        this.user = user;
     }
 }

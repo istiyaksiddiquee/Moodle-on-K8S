@@ -17,17 +17,17 @@ services:
       - POSTGRES_PASSWORD=password
     networks:
       - backend
-  user_mgmt:
-    container_name: user_management
-    build:
-      context: ./Project1
-      dockerfile: Dockerfile
-    ports: 
-      - 8080:8080
-    networks:
-      - backend
-    depends_on:
-      - postgres_db
+  # user_mgmt:
+  #   container_name: user_management
+  #   build:
+  #     context: ./Project1
+  #     dockerfile: Dockerfile
+  #   ports: 
+  #     - 8080:8080
+  #   networks:
+  #     - backend
+  #   depends_on:
+  #     - postgres_db
 
 
 volumes:

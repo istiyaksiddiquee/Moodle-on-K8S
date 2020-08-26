@@ -10,7 +10,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    public User persistUser(User user);
+    public User createUser(User user);
 
     /**
      * @param userId

@@ -12,19 +12,19 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "t_faculty")
-public class Faculty {
+@Table(name = "t_department")
+public class Department {
 
     // ============================ VARIABLES ===================================
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "serial")
     @SequenceGenerator(name = "serial", sequenceName = "serial", allocationSize = 1)
-    @Column(name = "faculty_id")
-    private int facultyId;
+    @Column(name = "department_id")
+    private int departmentId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="audit_id", referencedColumnName = "audit_id")
+    @JoinColumn(name="audit_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JsonIgnore
     private Audit audit;
@@ -35,12 +35,18 @@ public class Faculty {
     @Column(name = "address")
     private String address;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="faculty_id", referencedColumnName = "faculty_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Faculty faculty;
+
+
     // ============================ CONSTRUCTORS ===================================
 
-    public Faculty(Audit audit, String name, String address) {
+    public Department(String name, String address, Faculty faculty) {
 
-        this.audit = audit;
         this.name = name;
         this.address = address;
+        this.faculty = faculty;
     }
 }
