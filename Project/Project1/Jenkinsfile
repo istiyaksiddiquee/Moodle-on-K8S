@@ -1,5 +1,0 @@
-stage("P1"){
-    steps{
-        echo 'Compiling Spring REST'
-    }            
-}

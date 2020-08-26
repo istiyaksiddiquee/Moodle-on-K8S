@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+        xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+        version="2.0">
+
+<!--    <named-query name="User.findByUserNameNamedOrmXml">-->
+<!--        <query>SELECT h FROM User h WHERE LOWER(h.lastName) LIKE LOWER(CONCAT('%', :name, '%'))) ORDER BY h.firstName-->
+<!--            ASC</query>-->
+<!--    </named-query>-->
+
+    <named-native-query name="User.findByUserNameNamedNativeOrmXml"
+                        result-class="com.magnumopus.usermanagement.models.User">
+        <query>
+            SELECT *
+            FROM t_user u
+            WHERE LOWER (u.user_name) LIKE LOWER(CONCAT('%',:user_name, '%'))
+            ORDER BY u.first_name ASC
+        </query>
+    </named-native-query>
+</entity-mappings>
