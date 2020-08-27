@@ -1,10 +1,7 @@
 package com.magnumopus.usermanagement.utilities;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -20,7 +17,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({"com.magnumopus.usermanagement"})
-@PropertySource(value = {"classpath:application.properties"})
+@PropertySource(value = {"classpath:application.properties", "classpath:application-${spring.profiles.active}.properties"})
 public class HibernateConfiguration {
 
     @Autowired
@@ -31,14 +28,12 @@ public class HibernateConfiguration {
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setDatabase(Database.POSTGRESQL);
-//        vendorAdapter.setGenerateDdl(true);
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setDataSource(dataSource());
         factory.setPackagesToScan(new String[]{"com.magnumopus.usermanagement.models"});
         factory.setJpaVendorAdapter(vendorAdapter);
 
-//        factory.setHibernateProperties(hibernateProperties());
         factory.setMappingResources("classpath:NamedQueries.xml");
         return factory;
     }

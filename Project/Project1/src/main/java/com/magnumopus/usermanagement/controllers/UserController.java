@@ -3,7 +3,10 @@ package com.magnumopus.usermanagement.controllers;
 
 import com.magnumopus.usermanagement.models.User;
 import com.magnumopus.usermanagement.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -16,6 +19,8 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
+    Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     UserService userService;
 
@@ -26,6 +31,9 @@ public class UserController {
 
     @PostMapping("/")
     public ResponseEntity<User> createUser(@RequestBody User user) throws URISyntaxException {
+
+        logger.info("intercepted post call to create user");
+
         User createdStudent = userService.createUser(user);
         if (createdStudent == null) {
             return ResponseEntity.notFound().build();
