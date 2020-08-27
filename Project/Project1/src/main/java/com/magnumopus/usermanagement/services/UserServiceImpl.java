@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
      * @see com.magnumopus.usermanagement.services.UserService#createUser(User)
      * */
     @Override
+    @Transactional
     public User createUser(User user) {
         Audit audit = auditRepository.save(new Audit(1, "t_user", ActionType.CREATE.toString(), "New User created"));
         user.setAudit(audit);
@@ -44,6 +46,7 @@ public class UserServiceImpl implements UserService {
      * @see com.magnumopus.usermanagement.services.UserService#updateParticularUser(User)
      * */
     @Override
+    @Transactional
     public void updateParticularUser(User user) {
         userRepository.save(user);
     }
