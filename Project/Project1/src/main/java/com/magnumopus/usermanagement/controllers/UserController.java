@@ -3,6 +3,7 @@ package com.magnumopus.usermanagement.controllers;
 
 import com.magnumopus.usermanagement.models.User;
 import com.magnumopus.usermanagement.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -32,7 +34,9 @@ public class UserController {
     @PostMapping("/")
     public ResponseEntity<User> createUser(@RequestBody User user) throws URISyntaxException {
 
-        logger.info("intercepted post call to create user");
+//        logger.info("intercepted post call to create user");
+
+        log.info("intercepted post call to create user");
 
         User createdStudent = userService.createUser(user);
         if (createdStudent == null) {
@@ -50,6 +54,8 @@ public class UserController {
     
     @GetMapping("/getAllHuman")
     public List<User> getAllUser() {
+        log.info("intercepted post call to get all user");
+        logger.info("intercepted post call to get all human");
         return userService.findAllUser();
     }
 
