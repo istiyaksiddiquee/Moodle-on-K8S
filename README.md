@@ -1,5 +1,7 @@
 # Magnum Opus
 
+[![Build Status](https://circleci.com/gh/istiyaksiddiquee/MagumOpus.svg?style=svg)](https://circleci.com/gh/istiyaksiddiquee/MagumOpus.svg?style=svg)
+
 ** still under construction **
 
 Magnum Opus is my "Magnum Opus". It is a project that demonstrates my experience and expertise on all the tech-stacks that I claim to know or to have worked with. So, the idea of the project is very simple. It's a simple Moodle replica, that my university uses for maintaining it's online presence among students. 
