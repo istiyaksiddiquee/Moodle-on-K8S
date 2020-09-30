@@ -24,7 +24,7 @@ commands:
 executors:
   docker-executor:
     docker:
-      - image: circleci/openjdk:openjdk-11
+      - image: circleci/openjdk:15.0
 
 
 jobs:
