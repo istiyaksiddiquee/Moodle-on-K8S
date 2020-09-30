@@ -8,12 +8,11 @@ jobs:
     environment:
       TEST_REPORTS: /tmp/test-reports
 
-    working_directory: ~/Magnum-Opus/Project/Project1
+    working_directory: Project/Project1
 
     steps:
-      - run: cd ~/Magnum-Opus/Project/Project1
 
-      - checkout:
+      - checkout
 
       - run: mvn dependency:go-offline
 
