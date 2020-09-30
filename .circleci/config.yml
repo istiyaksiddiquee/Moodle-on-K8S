@@ -30,7 +30,7 @@ executors:
 jobs:
   test-with-docker:
     executor: docker-executor
-    working_directory: ~/Magnum-Opus/Project/Project1
+    working_directory: Magnum-Opus/Project/Project1
     steps:
       - test
 
