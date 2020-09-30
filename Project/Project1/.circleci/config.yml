@@ -3,10 +3,23 @@ version: 2.1
 orbs:
   maven: circleci/maven@0.0.12
 
-general:
-  build_dir: Project/Project1
+jobs:
+  build:
+    working_directory: ~/Project/Project1
+    environment:
+      # Customize the JVM maximum heap limit
+      MAVEN_OPTS: -Xmx3200m
 
-workflows:
-  maven_test:
-    jobs:
-      - maven/test # checkout, build, test, and upload test results
+    steps:
+      - checkout:
+          path: ~/Project
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: spring-{{ checksum "pom.xml" }}
+
+      # run tests!
+      - run: mvn verify
