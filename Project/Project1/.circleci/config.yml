@@ -11,10 +11,11 @@ jobs:
     working_directory: ~/Magnum-Opus/Project/Project1
 
     steps:
-      - checkout:
-          path: ~/Magnum-Opus/Project/Project1
+      - run: cd ~/Magnum-Opus/Project/Project1
 
-      - run: cd Project/Project1 && mvn dependency:go-offline
+      - checkout:
+
+      - run: mvn dependency:go-offline
 
       - save_cache:
           paths:
@@ -22,7 +23,7 @@ jobs:
           key: spring-{{ checksum "pom.xml" }}
 
         # run tests!
-      - run: cd Project/Project1 && mvn verify
+      - run: mvn verify
 
       # Save artifacts
       - store_artifacts:
