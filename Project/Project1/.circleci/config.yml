@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - checkout:
-          path: ~/Magnum-Opus
+          path: ~/Magnum-Opus/Project/Project1
 
       - run: mvn dependency:go-offline
 
