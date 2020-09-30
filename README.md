@@ -1,7 +1,8 @@
 # Magnum Opus
 
-![Build-Status](https://circleci.com/gh/istiyaksiddiquee/MagumOpus.svg?style=svg)(https://circleci.com/gh/istiyaksiddiquee/MagumOpus)
-![stable-stable](https://img.shields.io/badge/stability-stable-green.svg)
+[![Build Status](https://circleci.com/gh/istiyaksiddiquee/MagumOpus.svg?style=svg)](https://circleci.com/gh/istiyaksiddiquee/MagumOpus)
+![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
 ** still under construction **
 
