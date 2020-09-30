@@ -14,14 +14,16 @@ public class UserManagementApplication {
     }
 
     // configuring CORS support
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:8080");
-            }
-        };
-    }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**")
+//                        .allowedMethods("*")
+//                        .allowedHeaders("*")
+//                        .allowedOrigins("http://localhost:8080");
+//            }
+//        };
+//    }
 }

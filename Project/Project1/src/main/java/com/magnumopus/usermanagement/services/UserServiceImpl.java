@@ -5,6 +5,7 @@ import com.magnumopus.usermanagement.models.User;
 import com.magnumopus.usermanagement.repositories.AuditRepository;
 import com.magnumopus.usermanagement.repositories.UserRepository;
 import com.magnumopus.usermanagement.utilities.ActionType;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -21,6 +23,11 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private AuditRepository auditRepository;
+
+    public UserServiceImpl(UserRepository userRepository, AuditRepository auditRepository) {
+        this.userRepository = userRepository;
+        this.auditRepository = auditRepository;
+    }
 
     /***
      * @see com.magnumopus.usermanagement.services.UserService#createUser(User)
@@ -65,9 +72,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAllUser() {
         List<User> returnList = new ArrayList<>();
-
-        if(userRepository.findAll() != null) {
-            for (User user: userRepository.findAll()) {
+        Iterable<User> userList = userRepository.findAll();
+        if(userList != null) {
+            for (User user: userList) {
                 returnList.add(user);
             }
         }

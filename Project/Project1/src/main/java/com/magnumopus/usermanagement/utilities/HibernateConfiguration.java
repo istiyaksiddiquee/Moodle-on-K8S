@@ -37,7 +37,7 @@ public class HibernateConfiguration {
         factory.setPackagesToScan(new String[]{"com.magnumopus.usermanagement.models"});
         factory.setJpaVendorAdapter(vendorAdapter);
 
-        factory.setMappingResources("classpath:NamedQueries.xml");
+        factory.setMappingResources(environment.getRequiredProperty("spring.jpa.mapping-resources"));
         return factory;
     }
 
