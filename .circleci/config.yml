@@ -3,9 +3,7 @@ version: 2.1
 commands:
   test:
     steps:
-      - checkout:
-        path: Magnum-Opus/Project/Project1
-      
+      - checkout      
       - run: mvn test      
 
 executors:
