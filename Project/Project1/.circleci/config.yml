@@ -4,14 +4,14 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:openjdk-11
-    working_directory: ~/Magnum Opus/Project/Project1
+    working_directory: ~/Magnum-Opus/Project/Project1
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
 
     steps:
       - checkout:
-          path: ~/Magnum Opus
+          path: ~/Magnum-Opus
 
       - run: mvn dependency:go-offline
 
