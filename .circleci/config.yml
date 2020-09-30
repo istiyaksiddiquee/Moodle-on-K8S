@@ -1,25 +1,12 @@
 version: 2.1
 
 commands:
-  restore_cache_cmd:
-    steps:
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
-            - v1-dependencies-
-  save_cache_cmd:
-    steps:
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
   test:
     steps:
-      - checkout
-      - restore_cache_cmd
-      - run: mvn test
-      - save_cache_cmd
-
+      - checkout:
+        path: Magnum-Opus/Project/Project1
+      
+      - run: mvn test      
 
 executors:
   docker-executor:
@@ -30,7 +17,7 @@ executors:
 jobs:
   test-with-docker:
     executor: docker-executor
-    working_directory: ~/Project/Project1
+    working_directory: ~/Magnum-Opus
     steps:
       - test
 
