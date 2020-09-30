@@ -10,9 +10,7 @@ jobs:
       MAVEN_OPTS: -Xmx3200m
 
     steps:
-      - checkout:
-          path: ./Project1
-
+      
       - run: mvn dependency:go-offline
 
       - save_cache:
