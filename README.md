@@ -1,6 +1,7 @@
 # Magnum Opus
 
 [![Build Status](https://circleci.com/gh/istiyaksiddiquee/MagumOpus.svg?style=svg)](https://circleci.com/gh/istiyaksiddiquee/MagumOpus)
+![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)
 
 ** still under construction **
 
