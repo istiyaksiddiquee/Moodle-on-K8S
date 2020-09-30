@@ -20,10 +20,12 @@ commands:
       - run: mvn test
       - save_cache_cmd
 
+
 executors:
   docker-executor:
     docker:
       - image: circleci/openjdk:openjdk-11
+
 
 jobs:
   test-with-docker:
@@ -31,6 +33,7 @@ jobs:
     working_directory: ~/Magnum-Opus/Project/Project1
     steps:
       - test
+
 
 workflows:
   app-test-with-docker:
