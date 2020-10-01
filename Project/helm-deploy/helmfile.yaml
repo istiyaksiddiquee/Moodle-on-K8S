@@ -1,0 +1,7 @@
+releases:
+
+  - name: spring-app
+    namespace: development
+    chart: ./charts/spring-usermanagement
+    values:
+      - ./values/spring-usermanagement-values.yaml

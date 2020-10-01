@@ -44,7 +44,8 @@ public interface UserService {
 
     /**
      * @param userId
+     * @return
      */
-    public void deleteUser(int userId);
+    public String deleteUser(int userId);
 }
 

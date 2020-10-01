@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+  labels:
+    app: {{ .Values.app.name }}
+spec:
+  replicas: {{ .Values.app.spec.replicaCount }}
+  revisionHistoryLimit: {{ .Values.app.spec.revisionHistoryLimit }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: {{ .Values.app.spec.updateStrategy.maxUnavailable }}
+      maxSurge: {{ .Values.app.spec.updateStrategy.maxSurge }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      containers:
+        - name: {{ .Values.app.name }}
+          image: {{ .Values.app.container.image }}  
+          ports:
+            - containerPort: {{ .Values.app.container.port }}
+          env:
+            {{- range .Values.app.container.env}}
+            - name: {{ .key}}
+              value: {{ .value | quote}}
+            {{- end}}
+          readinessProbe:
+            tcpSocket:
+              port: {{ .Values.app.container.port }}
+            initialDelaySeconds: {{ .Values.app.container.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.app.container.readinessProbe.periodSeconds }}
+          livenessProbe:
+            tcpSocket:
+              port: {{ .Values.app.container.port }}
+            initialDelaySeconds: {{ .Values.app.container.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.app.container.livenessProbe.periodSeconds }}
+          resources:
+            requests:
+              memory: {{ .Values.app.container.resources.requests.memory | quote }}
+              cpu: {{ .Values.app.container.resources.requests.cpu | quote }}
+            limits:
+              memory: {{ .Values.app.container.resources.limits.memory | quote }}
+              cpu: {{ .Values.app.container.resources.limits.memory | quote }}

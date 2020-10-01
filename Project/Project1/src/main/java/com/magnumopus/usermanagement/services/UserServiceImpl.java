@@ -5,6 +5,7 @@ import com.magnumopus.usermanagement.models.User;
 import com.magnumopus.usermanagement.repositories.AuditRepository;
 import com.magnumopus.usermanagement.repositories.UserRepository;
 import com.magnumopus.usermanagement.utilities.ActionType;
+import com.magnumopus.usermanagement.utilities.InputValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -96,7 +98,16 @@ public class UserServiceImpl implements UserService {
      * @see com.magnumopus.usermanagement.services.UserService#deleteUser(int)
      * */
     @Override
-    public void deleteUser(int userId) {
-        userRepository.deleteById(userId);
+    public String deleteUser(int userId) {
+        String returnMsg = null;
+        Optional<User> user = userRepository.findById(userId);
+        if (user.get() != null) {
+            userRepository.delete(user.get());
+            returnMsg = "Deletion Successful";
+        } else {
+            returnMsg = "User not found";
+        }
+
+        return returnMsg;
     }
 }

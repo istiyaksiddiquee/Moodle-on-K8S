@@ -1,0 +1,40 @@
+app:
+  name: usermanagement
+  spec: 
+    replicaCount: 3
+    revisionHistoryLimit: 3
+    updateStrategy:
+      maxUnavailable: 1
+      maxSurge: 50%
+  container:
+    image: istiyaksiddiquee/usermanagement
+    tag: 0.1.0
+    port: 8080
+    env: 
+      - key: DEMO
+        value: "DEMO_VALUE"      
+    resources:
+      requests: 
+        memory: "32Mi"
+        cpu: "100m"
+      limits:
+        memory: "64Mi"
+        cpu: "500m"    
+    readinessProbe:
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    livenessProbe: 
+      initialDelaySeconds: 15
+      periodSeconds: 20
+    hpa:
+      minReplicas: 1
+      maxReplicas: 10
+  service:
+    name: usermanagement-svc
+    type: ClusterIP
+    port: 31007
+  ingress:
+    name: usermanagement-ing    
+    host: localhost
+    path: /
+    servicePort: 31007
