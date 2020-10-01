@@ -1,6 +1,12 @@
 releases:
 
-  - name: spring-app
+  - name: pgdb
+    namespace: development
+    chart: ./charts/postgresql
+    values:
+      - ./charts/postgresql/values.yaml
+
+  - name: spring-usermanagement
     namespace: development
     chart: ./charts/spring-usermanagement
     values:
