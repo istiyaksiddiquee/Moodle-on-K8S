@@ -18,4 +18,4 @@ FROM adoptopenjdk:14.0.2_8-jre-hotspot-bionic
 WORKDIR /my-project
 COPY --from=maven target/*.jar ./app.jar
 EXPOSE 8080
-CMD ["java", "-Dspring.profiles.active=prod", "-jar","/my-project/app.jar"]
+CMD ["java", "-jar","/my-project/app.jar"]

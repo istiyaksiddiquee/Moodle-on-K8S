@@ -8,8 +8,8 @@ app:
       maxSurge: 50%
   container:
     image: istiyaksiddiquee/usermanagement
-    tag: 0.5.0
-    port: 8080
+    tag: @@BUILD_NO@@
+    port: @@test@@
     env: 
       - key: SPRING_PROFILES_ACTIVE
         value: "prod"
