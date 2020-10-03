@@ -9,10 +9,10 @@ services:
       - 5432:5432
     volumes:
       - pg-datastore:/var/lib/postgresql
-      - ./PostgresDB/init.sql:/docker-entrypoint-initdb.d/init.sql
-    secrets:
-      - source: db_password
-        target: DB_PASSWORD
+      - ./dev-PostgresDB/init.sql:/docker-entrypoint-initdb.d/init.sql
+    # secrets:
+    #   - source: db_password
+    #     target: DB_PASSWORD
     environment: 
       - POSTGRES_PASSWORD=password
     networks:
@@ -33,9 +33,9 @@ services:
 volumes:
   pg-datastore:
 
-secrets:
-  db_password:
-    file: "./PostgresDB/db_password"  
+# secrets:
+#   db_password:
+#     file: "./PostgresDB/db_password"  
 
 networks:
   backend:
