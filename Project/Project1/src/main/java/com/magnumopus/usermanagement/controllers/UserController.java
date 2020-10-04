@@ -52,6 +52,13 @@ public class UserController {
     }
 
     @GetMapping("/")
+    public ResponseEntity replyHelloWorld() {
+        log.info("intercepted post call for hello world");
+        return ResponseEntity.ok("successful");
+
+    }
+
+    @GetMapping("/getAllUser")
     public List<User> getAllUser() {
         log.info("intercepted post call to get all user");
         return userService.findAllUser();

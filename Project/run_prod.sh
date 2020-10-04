@@ -1,1 +1,1 @@
-sh ./production_deploy.sh 0.5.0 8080
+sh ./production_deploy.sh 0.6.0

@@ -2,6 +2,7 @@ releases:
 
   - name: pgdb
     namespace: development
+    wait: true
     chart: ./charts/postgresql
     values:
       - ./charts/postgresql/values.yaml
@@ -11,3 +12,5 @@ releases:
     chart: ./charts/spring-usermanagement
     values:
       - ./values/spring-usermanagement-values.yaml
+    needs:
+      - development/pgdb

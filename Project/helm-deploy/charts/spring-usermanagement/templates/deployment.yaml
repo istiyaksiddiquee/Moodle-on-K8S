@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.app.name }}
   labels:
     app: {{ .Values.app.name }}
+    version: {{ .Values.app.version }}
 spec:
   replicas: {{ .Values.app.spec.replicaCount }}
   revisionHistoryLimit: {{ .Values.app.spec.revisionHistoryLimit }}
@@ -15,10 +16,12 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.app.name }}
+      version: {{ .Values.app.version }}
   template:
     metadata:
       labels:
         app: {{ .Values.app.name }}
+        version: {{ .Values.app.version }}
     spec:
       containers: 
         - name: {{ .Values.app.name }}

@@ -1,5 +1,6 @@
 app:
   name: usermanagement
+  version: stable
   spec: 
     replicaCount: 3
     revisionHistoryLimit: 3
@@ -8,7 +9,7 @@ app:
       maxSurge: 50%
   container:
     image: istiyaksiddiquee/usermanagement
-    tag: 0.5.0
+    tag: 0.6.0
     port: 8080
     env: 
       - key: SPRING_PROFILES_ACTIVE
@@ -38,3 +39,10 @@ app:
     host: localhost
     path: /
     servicePort: 31007
+  istio:
+    gateway:
+      configName: ingress-gateway-configuration
+      portNumber: 80
+    dr:
+      name: spring-webapp
+      hostName: spring-webapp
