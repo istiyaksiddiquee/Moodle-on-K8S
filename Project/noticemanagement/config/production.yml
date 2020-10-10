@@ -1,0 +1,11 @@
+server:
+  origin: http://nestjs-task-management-frontend.s3-website-eu-west-1.amazonaws.com
+
+db:
+  host: 'localhost'
+  username: 'magnumopus'
+  password: '123456'
+  synchronize: true
+
+test:
+  info: 'prod'

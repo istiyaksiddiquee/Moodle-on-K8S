@@ -1,6 +1,8 @@
 CREATE USER magnumopus WITH PASSWORD '123456';
 CREATE DATABASE magnum_rdbms;
+CREATE DATABASE notice;
 GRANT ALL PRIVILEGES ON DATABASE magnum_rdbms TO magnumopus;
+GRANT ALL PRIVILEGES ON DATABASE notice TO magnumopus;
 
 \c magnum_rdbms;
 
@@ -117,3 +119,22 @@ VALUES(1, 't_user', 'CREATE', 'Super user created');
 
 INSERT INTO t_user(audit_id, first_name, last_name, user_name, email_id, password, address) 
 VALUES(1, 'Istiyak', 'Siddiquee', 'istiyaksiddiquee', 'siddiquee@google.com', '123456', 'dummy address');
+
+\c notice;
+
+CREATE SEQUENCE notice_serial START 1;
+ALTER TABLE notice_serial OWNER TO magnumopus;
+
+CREATE TABLE IF NOT EXISTS t_notification (
+	notification_id INT NOT NULL PRIMARY KEY DEFAULT nextval('notice_serial'),
+	created_on TIMESTAMP DEFAULT NOW(), 	
+	notification_details VARCHAR
+);
+ALTER TABLE t_notification OWNER TO magnumopus;
+
+CREATE TABLE IF NOT EXISTS t_message (
+	message_id INT NOT NULL PRIMARY KEY DEFAULT nextval('notice_serial'),
+	created_on TIMESTAMP DEFAULT NOW(), 	
+	message_details VARCHAR
+);
+ALTER TABLE t_message OWNER TO magnumopus;
