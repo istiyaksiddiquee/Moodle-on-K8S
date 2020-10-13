@@ -1,0 +1,2 @@
+python -m venv %USERPROFILE%\python-venv-magnumopus
+%USERPROFILE%\python-venv-magnumopus\Scripts\activate
