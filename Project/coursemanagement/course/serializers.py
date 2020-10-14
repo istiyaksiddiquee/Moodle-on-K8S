@@ -1,9 +1,11 @@
 from rest_framework import serializers 
-
-class HelloSerialozer(serializers.ModelSerializer):
-    """Serializer for notice objects"""
-
+from course.models import Course
+ 
+ 
+class CourseSerializer(serializers.ModelSerializer):
+ 
     class Meta:
-        model = Tag
-        fields = ('id', 'name')
-        read_only_fields = ('id',)
+        model = Course
+        fields = ('id',
+                  'title',
+                  'description')

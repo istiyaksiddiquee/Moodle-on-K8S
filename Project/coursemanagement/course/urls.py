@@ -1,7 +1,6 @@
-from django.urls import path 
-
+from django.conf.urls import url 
 from course import views 
-
-urlpatterns = [
-    path('hello-view/', views.HelloApiView.as_view()),
+ 
+urlpatterns = [ 
+    url('course/', views.course_list)
 ]
