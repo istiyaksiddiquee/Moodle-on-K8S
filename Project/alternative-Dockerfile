@@ -1,3 +1,0 @@
-FROM openjdk:jdk-nanoserver
-
-CMD ["sh", "-c", "echo hello world"]

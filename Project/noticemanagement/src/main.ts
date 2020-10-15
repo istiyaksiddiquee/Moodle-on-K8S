@@ -9,7 +9,11 @@ async function bootstrap() {
   const logger = new Logger('bootstrap');
   
   const serverConfig = config.get('server');
-  const SERVER_PORT = serverConfig.get('port'); 
+  let SERVER_PORT = serverConfig.get('port'); 
+  
+  if (process.env.SERVER_PORT != null) {
+    SERVER_PORT = process.env.SERVER_PORT; 
+  }
     
   const app = await NestFactory.create(AppModule);
   

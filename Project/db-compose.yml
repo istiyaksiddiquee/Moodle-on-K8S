@@ -15,8 +15,8 @@ services:
     #     target: DB_PASSWORD
     environment: 
       - POSTGRES_PASSWORD=password
-    # networks:
-    #   - backend
+    networks:
+      - backend
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "magnum_rdbms", "-U", "magnumopus" ]
       timeout: 45s
@@ -47,6 +47,26 @@ services:
       - 9000:9000
     environment:
       - SPRING_PROFILES_ACTIVE=prod
+      - DB_HOST=magnum_pgdb
+      - DB_PORT=5432
+      - DB_USER=magnumopus
+      - DB_PWD=123456
+      - DB_NAME=magnum_rdbms
+    networks:
+      - backend
+    depends_on:
+      postgres_db: 
+        condition: service_healthy
+  notice_mgmt:
+    container_name: notice_management
+    image: noticemgmt:0.3.0
+    build:
+      context: ./noticemanagement
+      dockerfile: Dockerfile      
+    ports: 
+      - 4000:4000
+    environment:
+      - SERVER_PORT=4000
       - DB_HOST=magnum_pgdb
       - DB_PORT=5432
       - DB_USER=magnumopus
