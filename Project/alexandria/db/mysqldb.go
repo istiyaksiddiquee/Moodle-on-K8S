@@ -22,11 +22,11 @@ func getEnv(key, fallback string) string {
 
 func Init() {
 
-	user := getEnv("PG_USER", "magnumopus")
-	password := getEnv("PG_PASSWORD", "123456")
-	host := getEnv("PG_HOST", "localhost")
-	port := getEnv("PG_PORT", "3306")
-	database := getEnv("PG_DB", "exam")
+	host := getEnv("DB_HOST", "localhost")
+	port := getEnv("DB_PORT", "3306")
+	user := getEnv("DB_USER", "magnumopus")
+	password := getEnv("DB_PWD", "123456")
+	database := getEnv("DB_DB", "exam")
 
 	log.Println(fmt.Sprintf("server address: %s, port: %s", host, port))
 

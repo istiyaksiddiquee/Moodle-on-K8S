@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  coursemgmt:
+    hostname: coursemgmt
+    container_name: course_management
+    image: coursemgmt:0.1.0
+    # command: python manage.py runserver 0.0.0.0:6000
+    ports: 
+      - 6000:6000
+    environment:
+      - DB_HOST=localhost
+      - DB_PORT=5432
+      - DB_USER=magnumopus
+      - DB_PWD=123456
+      - DB_NAME=magnum_rdbms
+    networks:
+      - backend
+
+networks:
+    backend:
+        driver: bridge

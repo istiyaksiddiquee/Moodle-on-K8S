@@ -43,11 +43,20 @@ public class HibernateConfiguration {
 
     @Bean
     public DataSource dataSource() {
+
+        String DB_HOST = System.getenv("DB_HOST");
+        String DB_PORT = System.getenv("DB_PORT");
+        String DB_USER = System.getenv("DB_USER");
+        String DB_PASSWORD = System.getenv("DB_PWD");
+        String DB_NAME = System.getenv("DB_NAME");
+
+        String jdbcURL = String.format("jdbc:postgresql://%s:%s/%s", DB_HOST, DB_PORT, DB_NAME);
+
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
-        dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
-        dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
-        dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
+        dataSource.setUrl(jdbcURL);
+        dataSource.setUsername(DB_USER);
+        dataSource.setPassword(DB_PASSWORD);
         return dataSource;
     }
 

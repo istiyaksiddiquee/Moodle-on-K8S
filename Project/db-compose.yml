@@ -15,8 +15,13 @@ services:
     #     target: DB_PASSWORD
     environment: 
       - POSTGRES_PASSWORD=password
-    networks:
-      - backend
+    # networks:
+    #   - backend
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "magnum_rdbms", "-U", "magnumopus" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
   # pgadmin:
   #  hostname: pgadmin
   #  container_name: magnum_pgadmin
@@ -30,6 +35,28 @@ services:
   #    - postgres_db
   #  networks:
   #    - backend
+  user_mgmt:
+    container_name: user_management
+    image: usermgmt:0.3.0
+    build:
+      context: ./Project1
+      dockerfile: Dockerfile
+      args:
+        PORT: 9000
+    ports: 
+      - 9000:9000
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_HOST=magnum_pgdb
+      - DB_PORT=5432
+      - DB_USER=magnumopus
+      - DB_PWD=123456
+      - DB_NAME=magnum_rdbms
+    networks:
+      - backend
+    depends_on:
+      postgres_db: 
+        condition: service_healthy
   mysqldb:
     hostname: mysql
     container_name: magnum_mysqldb
@@ -50,42 +77,71 @@ services:
       - backend 
     healthcheck:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
-      timeout: 20s
+      timeout: 30s
       retries: 10
-  # gosvc:
-  #   hostname: gosvc 
-  #   container_name: go_trial
-  #   image: go-test:0.2.0 
+  gosvc:
+    hostname: gosvc 
+    container_name: go_trial
+    image: go-test:0.3.0 
+    build:
+      context: ./alexandria
+      dockerfile: Dockerfile
+      args:
+        PORT: 3000
+    ports: 
+      - 3000:3000
+    environment:
+      - DB_HOST=magnum_mysqldb
+      - DB_PORT=3306
+      - DB_USER=magnumopus
+      - DB_PWD=123456
+      - DB_DB=exam
+    networks:
+      - backend
+    depends_on:
+      mysqldb: 
+        condition: service_healthy
+  # coursemgmt:
+  #   hostname: coursemgmt
+  #   container_name: course_management
+  #   image: coursemgmt:0.2.0
+  #   command: >
+  #     sh -c "python manage.py migrate &&
+  #           python manage.py runserver localhost:6000"
   #   ports: 
-  #     - 3000:3000
+  #     - 6000:6000
   #   environment:
-  #     - PG_HOST=magnum_mysqldb
-  #     - PG_PORT=3306
-  #     - PG_USER=magnumopus
-  #     - PG_PASSWORD=123456
-  #     - PG_DB=exam
+  #     - DB_HOST=magnum_pgdb
+  #     - DB_PORT=5432
+  #     - DB_USER=magnumopus
+  #     - DB_PWD=123456
+  #     - DB_NAME=magnum_rdbms
   #   networks:
   #     - backend
+  #   links:
+  #     - postgres_db:postgres_db
   #   depends_on:
-  #     mysqldb: 
-  #       condition: service_healthy
-  
-  # user_mgmt:
-  #   container_name: user_management
-  #   build:
-  #     context: ./Project1
-  #     dockerfile: Dockerfile
-  #   ports: 
-  #     - 8080:8080
-  #   networks:
-  #     - backend
-  #   depends_on:
-  #     - postgres_db
+  #     postgres_db: 
+  #       condition: service_healthy  
 
+  # mongo:
+  #   image: mongo
+  #   restart: always
+  #   container_name: magnum_mongo
+  #   environment:
+  #       MONGO_INITDB_DATABASE: magnum_db
+  #   #   MONGO_INITDB_ROOT_USERNAME: magnumopus
+  #   #   MONGO_INITDB_ROOT_PASSWORD: 123456
+  #   volumes:
+  #     - mongo-datastore:/data/db 
+  #     - ./dev-mongo:/docker-entrypoint-initdb.d
+  #   ports:
+  #     - 27017:27017
 
 volumes:
   pg-datastore:
   mysql-datastore: 
+  mongo-datastore:
 
 # secrets:
 #   db_password:
@@ -93,4 +149,4 @@ volumes:
 
 networks:
   backend:
-    driver: bridge    
+    driver: bridge

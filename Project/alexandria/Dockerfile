@@ -33,7 +33,12 @@ FROM scratch
 
 COPY --from=builder /dist/main /
 
-EXPOSE 3000
+ARG PORT
+ENV ENV_PORT $PORT
+
+EXPOSE $ENV_PORT
+
+# EXPOSE 3000
 
 # Command to run the executable
 ENTRYPOINT ["/main"]

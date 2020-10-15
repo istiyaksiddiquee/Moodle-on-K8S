@@ -6,3 +6,9 @@ db:
   
 test:
   info: 'dev'
+
+mongo:
+  host: 'localhost'
+  username: 'magnumopus'
+  password: '123456'
+  synchronize: true

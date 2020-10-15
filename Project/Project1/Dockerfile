@@ -15,7 +15,11 @@ COPY ./src ./src
 RUN mvn clean package
 
 FROM adoptopenjdk:14.0.2_8-jre-hotspot-bionic
+
+ARG PORT
+ENV ENV_PORT $PORT
+
 WORKDIR /my-project
 COPY --from=maven target/*.jar ./app.jar
-EXPOSE 8080
-CMD ["java", "-jar","/my-project/app.jar"]
+EXPOSE $ENV_PORT
+CMD ["sh", "-c", "java -Dserver.port=$ENV_PORT -jar /my-project/app.jar"]

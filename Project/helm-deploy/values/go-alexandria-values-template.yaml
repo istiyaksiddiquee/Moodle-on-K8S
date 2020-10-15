@@ -1,0 +1,48 @@
+app:
+  name: usermanagement
+  version: stable
+  spec: 
+    replicaCount: 3
+    revisionHistoryLimit: 3
+    updateStrategy:
+      maxUnavailable: 1
+      maxSurge: 50%
+  container:
+    image: istiyaksiddiquee/usermanagement
+    tag: @@BUILD_NO@@
+    port: 8080
+    env: 
+      - key: SPRING_PROFILES_ACTIVE
+        value: "prod"
+    resources:
+      requests: 
+        memory: "512Mi"
+        cpu: "100m"
+      limits:
+        memory: "1024Mi"
+        cpu: "500m"    
+    readinessProbe:
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    livenessProbe: 
+      initialDelaySeconds: 15
+      periodSeconds: 20
+    hpa:
+      minReplicas: 1
+      maxReplicas: 10
+  service:
+    name: usermanagement-svc
+    type: ClusterIP
+    port: 31007
+  ingress:
+    name: usermanagement-ing    
+    host: localhost
+    path: /
+    servicePort: 31007
+  istio:
+    gateway:
+      configName: ingress-gateway-configuration
+      portNumber: 80
+    dr:
+      name: spring-webapp
+      hostName: spring-webapp
