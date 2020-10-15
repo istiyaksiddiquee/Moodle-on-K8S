@@ -8,7 +8,6 @@ pipeline{
             }            
         }
         stage("Project1"){
-            agent docker
             steps{
                 echo "========executing A========"
                 dir("Project/usermanagement") {
