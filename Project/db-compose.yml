@@ -39,7 +39,7 @@ services:
     container_name: user_management
     image: usermgmt:0.3.0
     build:
-      context: ./Project1
+      context: ./usermanagement
       dockerfile: Dockerfile
       args:
         PORT: 9000
