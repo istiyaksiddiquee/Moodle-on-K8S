@@ -21,9 +21,9 @@ pipeline{
             agent {
                 docker { image 'quay.io/roboll/helmfile:helm3-v0.131.0' }
             }
-            echo "=====Deploying UserManagement using Helmfile====="
             dir("Project/helm-deploy") {
                 steps {
+                    echo "=====Deploying UserManagement using Helmfile====="
                     sh 'helmfile apply'
                 }
             }
