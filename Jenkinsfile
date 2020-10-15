@@ -24,9 +24,7 @@ pipeline{
             steps {
                 echo "=====Deploying UserManagement using Helmfile====="
                 dir("Project/helm-deploy") {
-                    script {
-                        sh 'helmfile apply'
-                    }
+                    sh 'helmfile apply'                    
                 }
             }
             
