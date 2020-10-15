@@ -8,11 +8,13 @@ pipeline{
             }            
         }
         stage("Project1"){
+            agent docker
             steps{
                 echo "========executing A========"
-                dir("Project/Project1") {
-                    sh 'pwd'
-                    sh 'mvn clean package'
+                dir("Project/usermanagement") {
+                    def usermgmtImage = docker.build("istiyaksiddiquee/usermanagement", ".") 
+                    usermgmtImage.push('0.7.0')
+                    usermgmtImage.push('latest')
                 }
             }
         }
