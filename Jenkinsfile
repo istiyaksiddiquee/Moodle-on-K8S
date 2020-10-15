@@ -11,9 +11,7 @@ pipeline{
             steps{
                 echo "========executing A========"
                 dir("Project/usermanagement") {
-                    def usermgmtImage = docker.build("istiyaksiddiquee/usermanagement", ".") 
-                    usermgmtImage.push('0.7.0')
-                    usermgmtImage.push('latest')
+                    usermgmtImage = docker.build("istiyaksiddiquee/usermanagement:0.7.0")                     
                 }
             }
         }
