@@ -21,3 +21,8 @@ htmlpublisher:latest
 bouncycastle-api:latest
 command-launcher:latest
 sonar:latest
+docker:latest
+docker-commons:latest
+docker-workflow:latest
+yet-another-docker-plugin:latest
+filesystem_scm:latest
