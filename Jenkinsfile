@@ -11,7 +11,9 @@ pipeline{
             steps{
                 echo "========executing A========"
                 dir("Project/usermanagement") {
-                    docker.build("istiyaksiddiquee/usermanagement:0.7.0")                     
+                    script {
+                        docker.build("istiyaksiddiquee/usermanagement:0.7.0")
+                    }
                 }
             }
         }
