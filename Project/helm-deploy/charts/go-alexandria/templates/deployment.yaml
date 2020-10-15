@@ -1,52 +1,52 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.app.name }}
+  name: {{ .Values.go.name }}
   labels:
-    app: {{ .Values.app.name }}
-    version: {{ .Values.app.version }}
+    app: {{ .Values.go.name }}
+    version: {{ .Values.go.version }}
 spec:
-  replicas: {{ .Values.app.spec.replicaCount }}
-  revisionHistoryLimit: {{ .Values.app.spec.revisionHistoryLimit }}
+  replicas: {{ .Values.go.spec.replicaCount }}
+  revisionHistoryLimit: {{ .Values.go.spec.revisionHistoryLimit }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: {{ .Values.app.spec.updateStrategy.maxUnavailable }}
-      maxSurge: {{ .Values.app.spec.updateStrategy.maxSurge }}
+      maxUnavailable: {{ .Values.go.spec.updateStrategy.maxUnavailable }}
+      maxSurge: {{ .Values.go.spec.updateStrategy.maxSurge }}
   selector:
     matchLabels:
-      app: {{ .Values.app.name }}
-      version: {{ .Values.app.version }}
+      app: {{ .Values.go.name }}
+      version: {{ .Values.go.version }}
   template:
     metadata:
       labels:
-        app: {{ .Values.app.name }}
-        version: {{ .Values.app.version }}
+        app: {{ .Values.go.name }}
+        version: {{ .Values.go.version }}
     spec:
       containers: 
-        - name: {{ .Values.app.name }}
-          image: {{ .Values.app.container.image }}:{{ .Values.app.container.tag }}
+        - name: {{ .Values.go.name }}
+          image: {{ .Values.go.container.image }}:{{ .Values.go.container.tag }}
           ports:
-            - containerPort: {{ .Values.app.container.port }}
+            - containerPort: {{ .Values.go.container.port }}
           env:
-            {{- range .Values.app.container.env}}
+            {{- range .Values.go.container.env}}
             - name: {{ .key}}
               value: {{ .value | quote}}
             {{- end}}
           readinessProbe:
             tcpSocket:
-              port: {{ .Values.app.container.port }}
-            initialDelaySeconds: {{ .Values.app.container.readinessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.app.container.readinessProbe.periodSeconds }}
+              port: {{ .Values.go.container.port }}
+            initialDelaySeconds: {{ .Values.go.container.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.go.container.readinessProbe.periodSeconds }}
           livenessProbe:
             tcpSocket:
-              port: {{ .Values.app.container.port }}
-            initialDelaySeconds: {{ .Values.app.container.livenessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.app.container.livenessProbe.periodSeconds }}
+              port: {{ .Values.go.container.port }}
+            initialDelaySeconds: {{ .Values.go.container.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.go.container.livenessProbe.periodSeconds }}
           resources:
             requests:
-              memory: {{ .Values.app.container.resources.requests.memory | quote }}
-              cpu: {{ .Values.app.container.resources.requests.cpu | quote }}
+              memory: {{ .Values.go.container.resources.requests.memory | quote }}
+              cpu: {{ .Values.go.container.resources.requests.cpu | quote }}
             limits:
-              memory: {{ .Values.app.container.resources.limits.memory | quote }}
-              cpu: {{ .Values.app.container.resources.limits.memory | quote }}
+              memory: {{ .Values.go.container.resources.limits.memory | quote }}
+              cpu: {{ .Values.go.container.resources.limits.memory | quote }}

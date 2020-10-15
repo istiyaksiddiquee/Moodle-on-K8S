@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.app.service.name }}
+  name: {{ .Values.go.service.name }}
 spec:
-  type: {{ .Values.app.service.type }}
+  type: {{ .Values.go.service.type }}
   selector:             
-    app: {{ .Values.app.name }}
+    app: {{ .Values.go.name }}
   ports:
     - name: http-web
-      port: {{ .Values.app.service.port }}
-      targetPort: {{ .Values.app.container.port }}
+      port: {{ .Values.go.service.port }}
+      targetPort: {{ .Values.go.container.port }}

@@ -24,17 +24,10 @@ spec:
     - {{ .Values.app.istio.gateway.configName }}
   http:
     - match:
-      - uri:  # IF
-          prefix: "/experimental"
-      - uri:  # OR
-          prefix: "/canary"
-      route: # THEN
-      - destination:
-          host: {{ .Values.app.service.name }}
-          subset: experimental
-    - match:
-      - uri :
-          prefix: "/"
+      - uri: 
+          prefix: {{ .Values.app.istio.gateway.urlPrefix }}
+      rewrite:
+        uri: "/"
       route:
       - destination:
           host: {{ .Values.app.service.name }}

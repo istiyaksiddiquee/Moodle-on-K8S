@@ -9,11 +9,11 @@ app:
       maxSurge: 50%
   container:
     image: istiyaksiddiquee/usermanagement
-    tag: 0.6.0
+    tag: tag_here
     port: 8080
     env: 
-      - key: SPRING_PROFILES_ACTIVE
-        value: "prod"
+      - key: dummy
+        value: "dummy_val"
     resources:
       requests: 
         memory: "512Mi"
@@ -43,6 +43,7 @@ app:
     gateway:
       configName: ingress-gateway-configuration
       portNumber: 80
+      urlPrefix: "/spring"
     dr:
       name: spring-webapp
       hostName: spring-webapp

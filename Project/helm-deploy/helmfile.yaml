@@ -6,11 +6,37 @@ releases:
     chart: ./charts/postgresql
     values:
       - ./charts/postgresql/values.yaml
-
+      
+  - name: mysqldb
+    namespace: development
+    wait: true
+    chart: ./charts/mysql
+    values:
+      - ./charts/mysql/values.yaml
+  
   - name: spring-usermanagement
     namespace: development
+    wait: true
     chart: ./charts/spring-usermanagement
     values:
-      - ./values/spring-usermanagement-values.yaml
+      - ./values/combined_values.yaml
+    needs:
+      - development/pgdb
+  
+  - name: go-alexandria
+    namespace: development
+    wait: true
+    chart: ./charts/go-alexandria
+    values:
+      - ./values/combined_values.yaml
+    needs:
+      - development/mysqldb
+  
+  - name: nest-noticemgmt
+    namespace: development
+    wait: true
+    chart: ./charts/nest-noticemgmt
+    values:
+      - ./values/combined_values.yaml
     needs:
       - development/pgdb

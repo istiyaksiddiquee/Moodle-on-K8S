@@ -1,45 +1,45 @@
 # apiVersion: networking.istio.io/v1alpha3
 # kind: Gateway
 # metadata:
-#   name: {{ .Values.go.istio.gateway.configName }}
+#   name: {{ .Values.app.istio.gateway.configName }}
 # spec:
 #   selector:
 #     istio: ingressgateway # use Istio default gateway implementation
 #   servers:
 #   - port:
-#       number: {{ .Values.go.istio.gateway.portNumber }}
+#       number: {{ .Values.app.istio.gateway.portNumber }}
 #       name: http
 #       protocol: HTTP
 #     hosts:
 #     - "*"   # Domain name of the external website
----
+# ---
 kind: VirtualService
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: go-webapp
+  name: nest-webapp
 spec:
   hosts:
     - "*"
   gateways:
-    - {{ .Values.go.istio.gateway.configName }}
+    - {{ .Values.nest.istio.gateway.configName }}
   http:
-    - name: "go-v1-routes"
+    - name: "nest-v1-routes"
       match:
       - uri: 
-          prefix: {{ .Values.go.istio.gateway.urlPrefix }}
+          prefix: {{ .Values.nest.istio.gateway.urlPrefix }}
       rewrite:
         uri: "/"
       route:
       - destination:
-          host: {{ .Values.go.service.name }}
-          subset: stable    
+          host: {{ .Values.nest.service.name }}
+          subset: stable
 ---
 kind: DestinationRule
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: {{ .Values.go.istio.dr.name }}
+  name: {{ .Values.nest.istio.dr.name }}
 spec:
-  host: {{ .Values.go.service.name }}
+  host: {{ .Values.nest.service.name }}
   subsets:
     - labels:
         version: stable

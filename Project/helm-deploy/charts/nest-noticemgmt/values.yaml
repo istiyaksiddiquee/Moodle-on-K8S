@@ -1,5 +1,5 @@
-app:
-  name: usermanagement
+nest:
+  name: noticemgmt
   version: stable
   spec: 
     replicaCount: 3
@@ -8,12 +8,12 @@ app:
       maxUnavailable: 1
       maxSurge: 50%
   container:
-    image: istiyaksiddiquee/usermanagement
-    tag: @@BUILD_NO@@
-    port: 8080
+    image: istiyaksiddiquee/noticemanagement
+    tag: BUILD_NO
+    port: 4000
     env: 
-      - key: SPRING_PROFILES_ACTIVE
-        value: "prod"
+      - key: dummy
+        value: "value"
     resources:
       requests: 
         memory: "512Mi"
@@ -31,18 +31,19 @@ app:
       minReplicas: 1
       maxReplicas: 10
   service:
-    name: usermanagement-svc
+    name: noticemanagement-svc
     type: ClusterIP
-    port: 31007
+    port: 31008
   ingress:
-    name: usermanagement-ing    
+    name: noticemanagement-ing    
     host: localhost
     path: /
-    servicePort: 31007
+    servicePort: 31008
   istio:
     gateway:
       configName: ingress-gateway-configuration
       portNumber: 80
+      urlPrefix: prefix_here
     dr:
-      name: spring-webapp
-      hostName: spring-webapp
+      name: nest-webapp
+      hostName: nest-webapp

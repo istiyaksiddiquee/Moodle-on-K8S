@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.nest.name }}
+  labels:
+    app: {{ .Values.nest.name }}
+    version: {{ .Values.nest.version }}
+spec:
+  replicas: {{ .Values.nest.spec.replicaCount }}
+  revisionHistoryLimit: {{ .Values.nest.spec.revisionHistoryLimit }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: {{ .Values.nest.spec.updateStrategy.maxUnavailable }}
+      maxSurge: {{ .Values.nest.spec.updateStrategy.maxSurge }}
+  selector:
+    matchLabels:
+      app: {{ .Values.nest.name }}
+      version: {{ .Values.nest.version }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.nest.name }}
+        version: {{ .Values.nest.version }}
+    spec:
+      containers: 
+        - name: {{ .Values.nest.name }}
+          image: {{ .Values.nest.container.image }}:{{ .Values.nest.container.tag }}
+          ports:
+            - containerPort: {{ .Values.nest.container.port }}
+          env:
+            {{- range .Values.nest.container.env}}
+            - name: {{ .key}}
+              value: {{ .value | quote}}
+            {{- end}}
+          readinessProbe:
+            tcpSocket:
+              port: {{ .Values.nest.container.port }}
+            initialDelaySeconds: {{ .Values.nest.container.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.nest.container.readinessProbe.periodSeconds }}
+          livenessProbe:
+            tcpSocket:
+              port: {{ .Values.nest.container.port }}
+            initialDelaySeconds: {{ .Values.nest.container.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.nest.container.livenessProbe.periodSeconds }}
+          resources:
+            requests:
+              memory: {{ .Values.nest.container.resources.requests.memory | quote }}
+              cpu: {{ .Values.nest.container.resources.requests.cpu | quote }}
+            limits:
+              memory: {{ .Values.nest.container.resources.limits.memory | quote }}
+              cpu: {{ .Values.nest.container.resources.limits.memory | quote }}

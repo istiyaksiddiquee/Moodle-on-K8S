@@ -1,27 +1,27 @@
 version: '3.8'
 
 services:
-  postgres_db:
-    hostname: postgres
-    container_name: magnum_pgdb
-    image: postgres:13
-    ports: 
-      - 5432:5432
-    volumes:
-      - pg-datastore:/var/lib/postgresql
-      - ./dev-PostgresDB/init.sql:/docker-entrypoint-initdb.d/init.sql
-    # secrets:
-    #   - source: db_password
-    #     target: DB_PASSWORD
-    environment: 
-      - POSTGRES_PASSWORD=password
-    networks:
-      - backend
-    healthcheck:
-      test: [ "CMD", "pg_isready", "-q", "-d", "magnum_rdbms", "-U", "magnumopus" ]
-      timeout: 45s
-      interval: 10s
-      retries: 10
+  # postgres_db:
+  #   hostname: postgres
+  #   container_name: magnum_pgdb
+  #   image: postgres:13
+  #   ports: 
+  #     - 5432:5432
+  #   volumes:
+  #     - pg-datastore:/var/lib/postgresql
+  #     - ./dev-PostgresDB/init.sql:/docker-entrypoint-initdb.d/init.sql
+  #   # secrets:
+  #   #   - source: db_password
+  #   #     target: DB_PASSWORD
+  #   environment: 
+  #     - POSTGRES_PASSWORD=password
+  #   # networks:
+  #   #   - backend
+  #   healthcheck:
+  #     test: [ "CMD", "pg_isready", "-q", "-d", "magnum_rdbms", "-U", "magnumopus" ]
+  #     timeout: 45s
+  #     interval: 10s
+  #     retries: 10
   # pgadmin:
   #  hostname: pgadmin
   #  container_name: magnum_pgadmin
@@ -35,70 +35,70 @@ services:
   #    - postgres_db
   #  networks:
   #    - backend
-  user_mgmt:
-    container_name: user_management
-    image: usermgmt:0.3.0
-    build:
-      context: ./usermanagement
-      dockerfile: Dockerfile
-      args:
-        PORT: 9000
-    ports: 
-      - 9000:9000
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
-      - DB_HOST=magnum_pgdb
-      - DB_PORT=5432
-      - DB_USER=magnumopus
-      - DB_PWD=123456
-      - DB_NAME=magnum_rdbms
-    networks:
-      - backend
-    depends_on:
-      postgres_db: 
-        condition: service_healthy
-  notice_mgmt:
-    container_name: notice_management
-    image: noticemgmt:0.3.0
-    build:
-      context: ./noticemanagement
-      dockerfile: Dockerfile      
-    ports: 
-      - 4000:4000
-    environment:
-      - SERVER_PORT=4000
-      - DB_HOST=magnum_pgdb
-      - DB_PORT=5432
-      - DB_USER=magnumopus
-      - DB_PWD=123456
-      - DB_NAME=magnum_rdbms
-    networks:
-      - backend
-    depends_on:
-      postgres_db: 
-        condition: service_healthy
-  mysqldb:
-    hostname: mysql
-    container_name: magnum_mysqldb
-    image: mysql:8
-    ports: 
-      - 3306:3306
-    volumes:
-      - mysql-datastore:/var/lib/mysql
-      - ./dev-mysqlDB:/docker-entrypoint-initdb.d
-    # secrets:
-    #   - source: db_password
-    #     target: DB_PASSWORD
-    environment: 
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_USER=magnumopus
-      - MYSQL_PASSWORD=123456
-    networks:
-      - backend 
-    healthcheck:
-      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
-      timeout: 30s
-      retries: 10
+  # user_mgmt:
+  #   container_name: user_management
+  #   image: usermgmt:0.3.0
+  #   build:
+  #     context: ./usermanagement
+  #     dockerfile: Dockerfile
+  #     args:
+  #       PORT: 9000
+  #   ports: 
+  #     - 9000:9000
+  #   environment:
+  #     - SPRING_PROFILES_ACTIVE=prod
+  #     - DB_HOST=magnum_pgdb
+  #     - DB_PORT=5432
+  #     - DB_USER=magnumopus
+  #     - DB_PWD=123456
+  #     - DB_NAME=magnum_rdbms
+  #   networks:
+  #     - backend
+  #   depends_on:
+  #     postgres_db: 
+  #       condition: service_healthy
+  # notice_mgmt:
+  #   container_name: notice_management
+  #   image: noticemgmt:0.3.0
+  #   build:
+  #     context: ./noticemanagement
+  #     dockerfile: Dockerfile      
+  #   ports: 
+  #     - 4000:4000
+  #   environment:
+  #     - SERVER_PORT=4000
+  #     - DB_HOST=magnum_pgdb
+  #     - DB_PORT=5432
+  #     - DB_USER=magnumopus
+  #     - DB_PWD=123456
+  #     - DB_NAME=magnum_rdbms
+  #   networks:
+  #     - backend
+  #   depends_on:
+  #     postgres_db: 
+  #       condition: service_healthy
+  # mysqldb:
+  #   hostname: mysql
+  #   container_name: magnum_mysqldb
+  #   image: mysql:8
+  #   ports: 
+  #     - 3306:3306
+  #   volumes:
+  #     - mysql-datastore:/var/lib/mysql
+  #     - ./dev-mysqlDB:/docker-entrypoint-initdb.d
+  #   # secrets:
+  #   #   - source: db_password
+  #   #     target: DB_PASSWORD
+  #   environment: 
+  #     - MYSQL_ROOT_PASSWORD=password
+  #     - MYSQL_USER=magnumopus
+  #     - MYSQL_PASSWORD=123456
+  #   networks:
+  #     - backend 
+  #   healthcheck:
+  #     test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+  #     timeout: 30s
+  #     retries: 10
   gosvc:
     hostname: gosvc 
     container_name: go_trial
@@ -111,20 +111,23 @@ services:
     ports: 
       - 3000:3000
     environment:
-      - DB_HOST=magnum_mysqldb
+      - DB_HOST=mysqldb
       - DB_PORT=3306
       - DB_USER=magnumopus
       - DB_PWD=123456
       - DB_DB=exam
-    networks:
-      - backend
-    depends_on:
-      mysqldb: 
-        condition: service_healthy
+    # networks:
+    #   - backend
+    # depends_on:
+    #   mysqldb: 
+    #     condition: service_healthy
   # coursemgmt:
   #   hostname: coursemgmt
   #   container_name: course_management
   #   image: coursemgmt:0.2.0
+  #   build:
+  #     context: ./coursemanagement
+  #     dockerfile: Dockerfile
   #   command: >
   #     sh -c "python manage.py migrate &&
   #           python manage.py runserver localhost:6000"

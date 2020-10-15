@@ -1,0 +1,69 @@
+app:  
+  version: stable  
+  container:    
+    tag: 0.6.0
+    port: 8080 
+    env: 
+      - key: SPRING_PROFILES_ACTIVE
+        value: "prod"
+      - key: DB_HOST
+        value: "pgdb-postgresql"
+      - key: DB_PORT
+        value: "5432"
+      - key: DB_USER
+        value: "magnumopus"
+      - key: DB_PWD
+        value: "123456"
+      - key: DB_NAME
+        value: "magnum_rdbms"   
+  service: 
+    port: 31007
+  istio:
+    gateway:      
+      urlPrefix: "/spring/"
+
+go:  
+  version: stable  
+  container:  
+    tag: 0.6.0
+    port: 3000
+    env:
+      - key: DB_HOST
+        value: "mysqldb"
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_USER
+        value: "magnumopus"
+      - key: DB_PWD
+        value: "123456"
+      - key: DB_DB
+        value: "exam"   
+  service: 
+    port: 31009
+  istio:
+    gateway:      
+      urlPrefix: "/go/"
+
+nest:  
+  version: stable  
+  container:    
+    tag: 0.6.0
+    port: 4000
+    env:
+      - key: SERVER_PORT
+        value: "4000"
+      - key: DB_HOST
+        value: "pgdb-postgresql"
+      - key: DB_PORT
+        value: "5432"
+      - key: DB_USER
+        value: "magnumopus"
+      - key: DB_PWD
+        value: "123456"
+      - key: DB_NAME
+        value: "magnum_rdbms"
+  service:    
+    port: 31008
+  istio:
+    gateway:      
+      urlPrefix: "/nest/"

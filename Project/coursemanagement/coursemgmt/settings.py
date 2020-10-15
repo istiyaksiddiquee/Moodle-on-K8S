@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'coursemgmt.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PWD'),
-        'NAME': os.environ.get('DB_NAME'),
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'USER': 'magnumopus',
+        'PASSWORD': '123456',
+        'NAME': 'magnum_rdbms',
     }
 }
 

@@ -47,7 +47,7 @@ clusterDomain: cluster.local
 ## volumePermissions: Change the owner and group of the persistent volume mountpoint to runAsUser:fsGroup values from the securityContext section.
 ##
 volumePermissions:
-  enabled: false
+  enabled: true
   image:
     registry: docker.io
     repository: bitnami/minideb
@@ -84,7 +84,7 @@ root:
   ## MySQL admin password
   ## ref: https://github.com/bitnami/bitnami-docker-mysql#setting-the-root-password-on-first-run
   ##
-  password:
+  password: "123456"
   ## Option to force users to specify a password. That is required for 'helm upgrade' to work properly.
   ## If it is not force, a random password will be generated.
   ##
@@ -100,12 +100,12 @@ db:
   ## ref: https://github.com/bitnami/bitnami-docker-mysql#creating-a-database-user-on-first-run
   ## Note that this user should be different from the MySQL replication user (replication.user)
   ##
-  user:
-  password:
+  user: magnumopus
+  password: "123456"
   ## Database to create
   ## ref: https://github.com/bitnami/bitnami-docker-mysql#creating-a-database-on-first-run
   ##
-  name: my_database
+  name: exam
   ## Option to force users to specify a password. That is required for 'helm upgrade' to work properly.
   ## If it is not force, a random password will be generated.
   ##
@@ -296,6 +296,9 @@ master:
     ## If true, use a Persistent Volume Claim, If false, use emptyDir
     ##
     enabled: true
+
+    existingClaim: ms-pv-claim
+
     mountPath: /bitnami/mysql
     ## Persistent Volume Storage Class
     ## If defined, storageClassName: <storageClass>
@@ -307,14 +310,14 @@ master:
     # storageClass: "-"
     ## PVC annotations
     ##
-    annotations: {}
+    # annotations: {}
     ## Persistent Volume Access Mode
     ##
-    accessModes:
-      - ReadWriteOnce
+    # accessModes:
+      # - ReadWriteOnce
     ## Persistent Volume size
     ##
-    size: 8Gi
+    # size: 8Gi
     ## Use an existing PVC
     ##
     # existingClaim:
@@ -324,7 +327,7 @@ master:
 slave:
   ## Number of slave replicas
   ##
-  replicas: 1
+  replicas: 0
 
   ## Configure MySQL slave with a custom my.cnf file
   ## ref: https://mysql.com/kb/en/mysql/configuring-mysql-with-mycnf/#example-of-configuration-file
@@ -459,7 +462,7 @@ slave:
   persistence:
     ## If true, use a Persistent Volume Claim, If false, use emptyDir
     ##
-    enabled: true
+    enabled: false
     mountPath: /bitnami/mysql
     ## Persistent Volume Storage Class
     ## If defined, storageClassName: <storageClass>
@@ -471,17 +474,17 @@ slave:
     # storageClass: "-"
     ## PVC annotations
     ##
-    annotations: {}
+    # annotations: {}
     ## Persistent Volume Access Mode
     ##
-    accessModes:
-      - ReadWriteOnce
+    # accessModes:
+      # - ReadWriteOnce
     ## Persistent Volume size
     ##
-    size: 8Gi
+    # size: 8Gi
     ## Use an existing PVC
     ##
-    # existingClaim:
+    # existingClaim: ms-slave-pv-claim
 
 ## MySQL Service properties
 ##

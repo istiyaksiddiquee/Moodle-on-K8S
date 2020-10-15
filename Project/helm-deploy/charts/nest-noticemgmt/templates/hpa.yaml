@@ -1,14 +1,14 @@
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ .Values.go.name }}
+  name: {{ .Values.nest.name }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ .Values.go.name }}
-  minReplicas: {{ .Values.go.container.hpa.minReplicas }}
-  maxReplicas: {{ .Values.go.container.hpa.maxReplicas }}
+    name: {{ .Values.nest.name }}
+  minReplicas: {{ .Values.nest.container.hpa.minReplicas }}
+  maxReplicas: {{ .Values.nest.container.hpa.maxReplicas }}
   metrics:
   - type: Resource
     resource:
