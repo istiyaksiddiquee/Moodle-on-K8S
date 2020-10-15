@@ -11,7 +11,7 @@ pipeline{
             steps{
                 echo "========executing A========"
                 dir("Project/usermanagement") {
-                    usermgmtImage = docker.build("istiyaksiddiquee/usermanagement:0.7.0")                     
+                    docker.build("istiyaksiddiquee/usermanagement:0.7.0")                     
                 }
             }
         }
