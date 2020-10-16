@@ -1,4 +1,4 @@
-def docker_release_tag = "0.8.0"
+def docker_release_tag = "0.9.0"
 
 pipeline{
     agent any
@@ -11,16 +11,16 @@ pipeline{
         }
         stage("Build MicroServices"){
             parallel {
-                // stage("Building UserManagement") {
-                //     steps{
-                //         echo "=====Building Docker Image for UserManagement====="
-                //         dir("Project/usermanagement") {
-                //             script {
-                //                 docker.build("istiyaksiddiquee/usermanagement:${docker_release_tag}")
-                //             }
-                //         }
-                //     }
-                // }
+                stage("Building UserManagement") {
+                    steps{
+                        echo "=====Building Docker Image for UserManagement====="
+                        dir("Project/usermanagement") {
+                            script {
+                                docker.build("istiyaksiddiquee/usermanagement:${docker_release_tag}")
+                            }
+                        }
+                    }
+                }
                 stage("Building Noticemanagement") {
                     steps{
                         echo "=====Building Docker Image for Noticemanagement====="
@@ -31,16 +31,16 @@ pipeline{
                         }
                     }
                 }
-                // stage("Building Alexandria") {
-                //     steps{
-                //         echo "=====Building Docker Image for Alexandria====="
-                //         dir("Project/alexandria") {
-                //             script {
-                //                 docker.build("istiyaksiddiquee/alexandria:${docker_release_tag}")
-                //             }
-                //         }
-                //     }
-                // }
+                stage("Building Alexandria") {
+                    steps{
+                        echo "=====Building Docker Image for Alexandria====="
+                        dir("Project/alexandria") {
+                            script {
+                                docker.build("istiyaksiddiquee/alexandria:${docker_release_tag}")
+                            }
+                        }
+                    }
+                }
                 
             }            
         }

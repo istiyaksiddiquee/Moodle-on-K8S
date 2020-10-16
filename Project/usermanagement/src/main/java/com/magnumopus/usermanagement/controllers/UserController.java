@@ -4,7 +4,6 @@ package com.magnumopus.usermanagement.controllers;
 import com.magnumopus.usermanagement.models.User;
 import com.magnumopus.usermanagement.services.UserService;
 import com.magnumopus.usermanagement.utilities.InputValidator;
-import com.magnumopus.usermanagement.utilities.ResponseMessages;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,7 +54,6 @@ public class UserController {
     public ResponseEntity replyHelloWorld() {
         log.info("intercepted post call for hello world");
         return ResponseEntity.ok("successful");
-
     }
 
     @GetMapping("/getAllUser")
