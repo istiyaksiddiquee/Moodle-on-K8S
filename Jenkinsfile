@@ -2,8 +2,7 @@ pipeline{
     agent {
         docker {
             image 'helmfile_streamlined:latest'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-            args '-v /root/.kube:/root/.kube'            
+            args '-v /var/run/docker.sock:/var/run/docker.sock -v /root/.kube:/root/.kube' 
         }
     }
     
