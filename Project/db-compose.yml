@@ -35,28 +35,28 @@ services:
   #    - postgres_db
   #  networks:
   #    - backend
-  # user_mgmt:
-  #   container_name: user_management
-  #   image: usermgmt:0.3.0
-  #   build:
-  #     context: ./usermanagement
-  #     dockerfile: Dockerfile
-  #     args:
-  #       PORT: 9000
-  #   ports: 
-  #     - 9000:9000
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=prod
-  #     - DB_HOST=magnum_pgdb
-  #     - DB_PORT=5432
-  #     - DB_USER=magnumopus
-  #     - DB_PWD=123456
-  #     - DB_NAME=magnum_rdbms
-  #   networks:
-  #     - backend
-  #   depends_on:
-  #     postgres_db: 
-  #       condition: service_healthy
+  user_mgmt:
+    container_name: user_management
+    image: usermgmt:0.3.0
+    build:
+      context: ./usermanagement
+      dockerfile: Dockerfile
+      args:
+        PORT: 9000
+    ports: 
+      - 9000:9000
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_HOST=magnum_pgdb
+      - DB_PORT=5432
+      - DB_USER=magnumopus
+      - DB_PWD=123456
+      - DB_NAME=magnum_rdbms
+    # networks:
+    #   - backend
+    # depends_on:
+    #   postgres_db: 
+    #     condition: service_healthy
   # notice_mgmt:
   #   container_name: notice_management
   #   image: noticemgmt:0.3.0
@@ -93,8 +93,8 @@ services:
   #     - MYSQL_ROOT_PASSWORD=password
   #     - MYSQL_USER=magnumopus
   #     - MYSQL_PASSWORD=123456
-  #   networks:
-  #     - backend 
+  #   # networks:
+  #   #   - backend 
   #   healthcheck:
   #     test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
   #     timeout: 30s
@@ -102,7 +102,7 @@ services:
   gosvc:
     hostname: gosvc 
     container_name: go_trial
-    image: go-test:0.3.0 
+    image: go-test:0.4.0 
     build:
       context: ./alexandria
       dockerfile: Dockerfile
@@ -116,8 +116,8 @@ services:
       - DB_USER=magnumopus
       - DB_PWD=123456
       - DB_DB=exam
-    # networks:
-    #   - backend
+  #   # networks:
+  #   #   - backend
     # depends_on:
     #   mysqldb: 
     #     condition: service_healthy

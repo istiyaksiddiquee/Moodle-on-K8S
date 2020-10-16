@@ -14,7 +14,14 @@ func GetTasks(c *gin.Context) {
 	var tasks []models.Task
 	db := db.GetDB()
 	db.Find(&tasks)
-	c.Header("test", "added header")
+	c.Header("test", c.GetHeader("Token"))
+	c.Header("x-request-id", c.GetHeader("x-request-id"))
+	c.Header("x-b3-traceid", c.GetHeader("x-b3-traceid"))
+	c.Header("x-b3-spanid", c.GetHeader("x-b3-spanid"))
+	c.Header("x-b3-parentspanid", c.GetHeader("x-b3-parentspanid"))
+	c.Header("x-b3-sampled", c.GetHeader("x-b3-sampled"))
+	c.Header("x-b3-flags", c.GetHeader("x-b3-flags"))
+	c.Header("b3", c.GetHeader("b3"))
 	c.JSON(200, tasks)
 }
 
