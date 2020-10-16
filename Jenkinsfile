@@ -26,6 +26,7 @@ pipeline{
             steps {
                 echo "=====Deploying UserManagement using Helmfile====="
                 dir("Project/helm-deploy") {
+                    sh 'export KUBECONFIG=/root/.kube'
                     sh 'helmfile apply'                    
                 }
             }
