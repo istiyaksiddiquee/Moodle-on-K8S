@@ -25,10 +25,9 @@ pipeline{
         stage("Deployment") {            
             steps {
                 echo "=====Deploying UserManagement using Helmfile====="
-                dir("Project/helm-deploy") {
-                    sh 'kubectl config view --raw >~/.kube/config'
+                dir("Project/helm-deploy") {                    
                     sh 'export KUBECONFIG=/root/.kube'
-                    sh 'helmfile apply'
+                    sh 'helm list'
                 }
             }
             
