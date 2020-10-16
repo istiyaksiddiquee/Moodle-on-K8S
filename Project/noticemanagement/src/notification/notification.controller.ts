@@ -26,12 +26,7 @@ export class NotificationController {
     //     if (err) inscribedlLogger.error(err);
     //     else inscribedlLogger.log(res);            
     //   });        
-    // }
-
-    @Get()
-    testENV() {
-        this.logger.log(`this is DB_username: ${process.env.TEST as string}`);
-    }
+    // }    
 
     @Get()
     getAllTasks() {                
