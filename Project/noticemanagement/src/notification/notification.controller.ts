@@ -33,6 +33,12 @@ export class NotificationController {
         this.logger.log(`this is DB_username: ${process.env.TEST as string}`);
     }
 
+    @Get()
+    getAllTasks() {                
+        this.logger.log("Intercepted a call to get all notifications");
+        return this.notificationService.getAllNotification();
+    }
+
     @Post()
     @UsePipes(ValidationPipe)
     createNotification(
