@@ -13,7 +13,7 @@ services:
       - jenkins_home:/var/jenkins_home
       - ./JenkinsBuilder/config:/var/jenkins_conf
       - /var/run/docker.sock:/var/run/docker.sock
-      - C:\Users\Istiyak\.kube:/root/.kube
+      - C:\Users\Istiyak\.kube:/home/.kube
       - E:\Codes\Magnum-Opus:/home/project
       - E:\Codes\Magnum-Opus\maven_repo:/home/mvn_repo
     secrets:
