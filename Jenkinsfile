@@ -1,5 +1,11 @@
 pipeline{
-    agent any
+    agent {
+        docker {
+            image 'helmfile_streamlined:latest'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+            args '-v /root/.kube:/root/.kube'            
+        }
+    }
     
     stages{
         stage("Check SCM") {
@@ -17,10 +23,7 @@ pipeline{
                 }
             }
         }
-        stage("Deployment") {
-            agent {
-                docker { image 'quay.io/roboll/helmfile:helm3-v0.131.0' }
-            }
+        stage("Deployment") {            
             steps {
                 echo "=====Deploying UserManagement using Helmfile====="
                 dir("Project/helm-deploy") {
