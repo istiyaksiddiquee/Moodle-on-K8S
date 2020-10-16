@@ -34,3 +34,23 @@ RUN add-apt-repository \
 RUN apt-get update -qq && apt-get install docker-ce -y
 
 RUN usermod -aG docker jenkins
+
+ARG HELM_VERSION=v3.3.3
+ARG HELM_LOCATION="https://get.helm.sh"
+ARG HELM_FILENAME="helm-${HELM_VERSION}-linux-amd64.tar.gz"
+ARG HELM_SHA256="246d58b6b353e63ae8627415a7340089015e3eb542ff7b5ce124b0b1409369cc"
+RUN wget ${HELM_LOCATION}/${HELM_FILENAME} && \
+    echo Verifying ${HELM_FILENAME}... && \
+    sha256sum ${HELM_FILENAME} | grep -q "${HELM_SHA256}" && \
+    echo Extracting ${HELM_FILENAME}... && \
+    tar zxvf ${HELM_FILENAME} && mv /linux-amd64/helm /usr/local/bin/ && \
+    rm ${HELM_FILENAME} && rm -r /linux-amd64
+
+RUN helm plugin install https://github.com/databus23/helm-diff --version v3.1.3 && \
+    helm plugin install https://github.com/futuresimple/helm-secrets && \
+    helm plugin install https://github.com/hypnoglow/helm-s3.git && \
+    helm plugin install https://github.com/aslafy-z/helm-git.git
+
+RUN wget https://github.com/roboll/helmfile/releases/download/v0.131.0/helmfile_linux_amd64 && \
+    chmod +x helmfile_linux_amd64 && \
+    mv helmfile_linux_amd64 /usr/local/bin/helmfile

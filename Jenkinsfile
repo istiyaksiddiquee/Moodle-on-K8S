@@ -1,11 +1,5 @@
 pipeline{
-    agent {
-        docker {
-            image 'helmfile_streamlined:latest'
-            args '-v /home/.kube:/root/.kube' 
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
     
     stages{
         stage("Check SCM") {
@@ -27,8 +21,7 @@ pipeline{
             steps {
                 echo "=====Deploying UserManagement using Helmfile====="
                 dir("Project/helm-deploy") {                    
-                    sh 'export KUBECONFIG=/root/.kube'
-                    sh 'helm list'
+                    sh 'helmfile apply'
                 }
             }
             
