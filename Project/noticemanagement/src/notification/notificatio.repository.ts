@@ -4,6 +4,8 @@ import { CreateNotificationDto } from './dto/create-notification.dto';
 
 import { Logger, InternalServerErrorException, Injectable } from '@nestjs/common';
 
+import { v4 as uuidv4 } from 'uuid';
+
 @EntityRepository(Notification)
 @Injectable()
 export class NotificationRepository extends Repository<Notification> {
@@ -17,6 +19,7 @@ export class NotificationRepository extends Repository<Notification> {
         const { description } = createNotificationDto;
 
         const notification = new Notification();
+        notification.notification_id = uuidv4(),
         notification.notification_details = description;
 
         try {
