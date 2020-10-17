@@ -1,8 +1,9 @@
 app:  
   version: stable  
-  container:    
-    tag: 0.7.0
-    port: 8080 
+  container:  
+    image: istiyaksiddiquee/usermanagement
+    tag: 0.9.0
+    port: 9000 
     env: 
       - key: SPRING_PROFILES_ACTIVE
         value: "prod"
@@ -24,8 +25,9 @@ app:
 
 go:  
   version: stable  
-  container:  
-    tag: 0.6.0
+  container:
+    image: istiyaksiddiquee/alexandria
+    tag: 0.9.0
     port: 3000
     env:
       - key: DB_HOST
@@ -46,8 +48,9 @@ go:
 
 nest:  
   version: stable  
-  container:    
-    tag: 0.6.0
+  container:
+    image: istiyaksiddiquee/noticemanagement
+    tag: 0.9.0
     port: 4000
     env:
       - key: SERVER_PORT

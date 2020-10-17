@@ -1,7 +1,7 @@
-repositories:
-  
-  - name: bitnami
-    url: https://charts.bitnami.com/bitnami
+# repositories:
+#  
+#  - name: bitnami
+#    url: https://charts.bitnami.com/bitnami
 
 releases:
 
