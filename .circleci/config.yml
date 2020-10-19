@@ -4,7 +4,7 @@ commands:
   test:
     steps:
       - checkout      
-      - run: cd ./Project/Project1 && mvn test      
+      - run: cd ./Project/usermanagement && mvn test      
 
 executors:
   docker-executor:
