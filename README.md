@@ -9,6 +9,17 @@
 
 Magnum Opus is my "Magnum Opus". It is a project that demonstrates my experience and expertise on all the tech-stacks that I claim to know or to have worked with. So, the idea of the project is very simple. It's a simple Moodle replica, that my university uses for maintaining it's online presence among students. 
 
+Implemented Features (so far): 
+* Microservices - Spring, NestJs, Go Gin-Gonic, Django 
+* DB instances - PostgreSQL, MySQL, Redis
+* CI - Jenkins, CircleCI
+* Jenkins - Pipeline As Code, extended base Jenkins image and implemented Infrastructure as Code
+* Kubernetes - Dockerized and created Helm charts for everything 
+* Istio - monitoring and controlling using Istio (Kiali, Grafana, Prometheus) implemented  
+* Log Aggregation - ELK with Filebeat 
+* Deployment Environment - local, cloud not configured yet
+
+
 The whole project is designed using microservice architecture. REST, gRPC, GraphQL all three concepts were used in the backend and corresponding frontend were created to interface with them. A "no button click policy" was adapted to deploy the whole project to digital ocean meaning that to deploy the whole system, only a single sh command is required. It will then spin up the required resources on Digital Ocean, deploy Kubernetes, get and build the code, and deploy required services on Kubernetes cluster. And during this whole time, no button click is necessary.
 
 Front-End:
