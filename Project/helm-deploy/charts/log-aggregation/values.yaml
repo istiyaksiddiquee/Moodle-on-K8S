@@ -1,0 +1,13 @@
+log:
+  elastic: 
+    name: elasticsearch-logging
+    label: elasticsearch-logging
+  logstash:
+    name: logstash
+    label: logstash
+  kibana: 
+    name: kibana-logging
+    label: kibana-logging
+  filebeat:
+    name: filebeat
+    label: filebeat

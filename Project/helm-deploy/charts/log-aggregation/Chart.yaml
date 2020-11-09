@@ -1,0 +1,16 @@
+annotations:
+  category: Logging
+apiVersion: v1
+appVersion: 0.1.0
+description: Chart to create centralized log aggregator
+keywords:
+- elastic
+- kibana
+- logstash
+- filebeat
+- kubernetes
+maintainers:
+- email: istiyaksiddiquee@gmail.com
+  name: Istiyak H. Siddiquee
+name: Logging
+version: 0.1.0

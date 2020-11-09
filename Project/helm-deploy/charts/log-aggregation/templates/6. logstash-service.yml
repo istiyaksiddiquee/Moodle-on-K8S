@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Values.log.logstash.name }}-service
+  namespace: kube-system
+spec:
+  selector:
+    app: {{ .Values.log.logstash.label }}
+  ports:
+  - protocol: TCP
+    port: 5044
+    targetPort: 5044
+    

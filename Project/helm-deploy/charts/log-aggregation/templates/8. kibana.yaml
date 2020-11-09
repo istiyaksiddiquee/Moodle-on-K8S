@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.log.kibana.name }}
+  namespace: kube-system
+  labels:
+    k8s-app: {{ .Values.log.kibana.label }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: {{ .Values.log.kibana.label }}
+  template:
+    metadata:
+      labels:
+        k8s-app: {{ .Values.log.kibana.label }}
+    spec:
+      containers:
+      - name: {{ .Values.log.kibana.name }}
+        image: docker.elastic.co/kibana/kibana-oss:6.8.4
+        env:
+          - name: ELASTICSEARCH_URL
+            value: http://elasticsearch-logging:9200
+        ports:
+        - containerPort: 5601
+          name: ui
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.log.kibana.name }}
+  namespace: kube-system
+  labels:
+    k8s-app: {{ .Values.log.kibana.label }}
+    kubernetes.io/name: "Kibana"
+spec:
+  type: NodePort
+  ports:
+  - port: 5601
+    protocol: TCP
+    targetPort: ui
+    nodePort: 32010
+  selector:
+    k8s-app: {{ .Values.log.kibana.label }}

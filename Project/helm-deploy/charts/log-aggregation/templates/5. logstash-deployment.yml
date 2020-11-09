@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.log.logstash.name }}-deployment
+  namespace: kube-system
+  labels:
+    app: {{ .Values.log.logstash.label }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.log.logstash.label }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.log.logstash.label }}
+    spec:
+      containers:
+      - name: {{ .Values.log.logstash.name }}
+        image: docker.elastic.co/logstash/logstash:6.3.0
+        ports:
+        - containerPort: 5044
+        volumeMounts:
+          - name: config-volume
+            mountPath: /usr/share/logstash/config
+          - name: {{ .Values.log.logstash.name }}-pipeline-volume
+            mountPath: /usr/share/logstash/pipeline
+      volumes:
+      - name: config-volume
+        configMap:
+          name: {{ .Values.log.logstash.name }}-configmap
+          items:
+            - key: logstash.yml
+              path: logstash.yml
+      - name: logstash-pipeline-volume
+        configMap:
+          name: {{ .Values.log.logstash.name }}-configmap
+          items:
+            - key: logstash.conf
+              path: logstash.conf

@@ -53,6 +53,7 @@ pipeline{
                     sh "helm upgrade --install --wait spring-usermanagement -f ./values/combined_values.yaml ./charts/spring-usermanagement --set app.container.tag='${docker_release_tag}'  -n development"
                     sh "helm upgrade --install --wait go-alexandria -f ./values/combined_values.yaml ./charts/go-alexandria --set go.container.tag='${docker_release_tag}' -n development"
                     sh "helm upgrade --install --wait nest-noticemgmt -f ./values/combined_values.yaml ./charts/nest-noticemgmt --set nest.container.tag='${docker_release_tag}'  -n development"
+                    sh "helm upgrade --install --wait --timeout 360s log-aggregator -f ./charts/log-aggregation/values.yaml ./charts/log-aggregation -n development"
                 }
             }
         }
