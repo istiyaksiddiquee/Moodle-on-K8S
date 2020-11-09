@@ -39,6 +39,13 @@ metadata:
   name: {{ .Values.app.istio.dr.name }}
 spec:
   host: {{ .Values.app.service.name }}
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 100
+      http:
+        http2MaxRequests: 1000
+        maxRequestsPerConnection: 50
   subsets:
     - labels:
         version: stable
