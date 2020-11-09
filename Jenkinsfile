@@ -46,10 +46,10 @@ pipeline{
         }
         stage("Deployment") {            
             steps {
-                echo "=====Deploying UserManagement using Helmfile====="
+                echo "=====Deploying helm charts manually====="
                 dir("Project/helm-deploy") {                    
-                    sh "helm upgrade --install --wait --timeout 180s pgdb -f ./charts/postgresql/values.yaml ./charts/postgresql -n development"
-                    sh "helm upgrade --install --wait --timeout 180s mysqldb -f ./charts/mysql/values.yaml ./charts/mysql -n development"
+                    sh "helm upgrade --install --wait --timeout 360s pgdb -f ./charts/postgresql/values.yaml ./charts/postgresql -n development"
+                    sh "helm upgrade --install --wait --timeout 360s mysqldb -f ./charts/mysql/values.yaml ./charts/mysql -n development"
                     sh "helm upgrade --install --wait spring-usermanagement -f ./values/combined_values.yaml ./charts/spring-usermanagement --set app.container.tag='${docker_release_tag}'  -n development"
                     sh "helm upgrade --install --wait go-alexandria -f ./values/combined_values.yaml ./charts/go-alexandria --set go.container.tag='${docker_release_tag}' -n development"
                     sh "helm upgrade --install --wait nest-noticemgmt -f ./values/combined_values.yaml ./charts/nest-noticemgmt --set nest.container.tag='${docker_release_tag}'  -n development"
