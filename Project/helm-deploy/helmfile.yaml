@@ -45,3 +45,10 @@ releases:
       - ./values/combined_values.yaml
     needs:
       - development/pgdb
+
+  - name: log-aggregator
+    namespace: development
+    wait: true
+    chart: ./charts/log-aggregation
+    values:
+      - ./values/combined_values.yaml
