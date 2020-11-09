@@ -40,12 +40,8 @@ metadata:
 spec:
   host: {{ .Values.app.service.name }}
   trafficPolicy:
-    connectionPool:
-      tcp:
-        maxConnections: 100
-      http:
-        http2MaxRequests: 1000
-        maxRequestsPerConnection: 50
+    tls:
+      mode: ISTIO_MUTUAL
   subsets:
     - labels:
         version: stable
