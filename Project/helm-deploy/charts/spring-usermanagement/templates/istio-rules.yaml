@@ -39,9 +39,6 @@ metadata:
   name: {{ .Values.app.istio.dr.name }}
 spec:
   host: {{ .Values.app.service.name }}
-  trafficPolicy:
-    tls:
-      mode: ISTIO_MUTUAL
   subsets:
     - labels:
         version: stable
