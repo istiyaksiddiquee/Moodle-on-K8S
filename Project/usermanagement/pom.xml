@@ -19,7 +19,7 @@
 
         <springdata.version>2.3.3.RELEASE</springdata.version>
         <springframework.version>5.2.8.RELEASE</springframework.version>
-        <hibernate.version>5.4.20.Final</hibernate.version>
+        <hibernate.version>5.4.24.Final</hibernate.version>
         <dbcp2.version>2.7.0</dbcp2.version>
         <pool2.version>2.8.1</pool2.version>
         <postgresql.version>42.2.16</postgresql.version>
