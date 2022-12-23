@@ -1,4 +1,4 @@
-# Magnum Opus
+# Moodle on K8S
 
 [![Build Status](https://circleci.com/gh/istiyaksiddiquee/MagumOpus.svg?style=svg)](https://circleci.com/gh/istiyaksiddiquee/MagumOpus)
 ![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)
@@ -7,7 +7,7 @@
 
 ** still under construction **
 
-Magnum Opus is my "Magnum Opus". It is a project that demonstrates my experience and expertise on all the tech-stacks that I claim to know or to have worked with. So, the idea of the project is very simple. It's a simple Moodle replica, that my university uses for maintaining it's online presence among students. 
+Moodle on K8S is a project that demonstrates my experience and expertise on all the tech-stacks that I claim to know or to have worked with. So, the idea of the project is very simple. It's a simple Moodle replica, that my university uses for maintaining it's online presence among students. 
 
 Updates (so far): 
 * BackEnd Microservices - Spring, NestJs, Go Gin-Gonic, Django 
